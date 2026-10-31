@@ -1,0 +1,19 @@
+{
+  "name": "EduVerse - Semesta Belajar 3D",
+  "short_name": "EduVerse",
+  "description": "Game belajar 3D anak Indonesia. Jelajahi dunia, selesaikan misi, dan jawab soal dari guru.",
+  "lang": "id",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "fullscreen", "standalone"],
+  "orientation": "any",
+  "background_color": "#14183a",
+  "theme_color": "#14183a",
+  "categories": ["education", "games"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "eduverse",
+  "version": "1.0.0",
+  "description": "EduVerse - Semesta Belajar 3D (All-in-One Server: Static Frontend, REST API & Realtime WebSocket)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

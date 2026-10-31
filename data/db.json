@@ -1,0 +1,278 @@
+{
+  "seq": {
+    "guru": 3,
+    "murid": 2,
+    "sesi": 2,
+    "tantangan": 1,
+    "pendamping": 1,
+    "bayar": 1,
+    "kode": 1
+  },
+  "setelan": {
+    "google_client_id": "",
+    "harga": "Gratis (Bebas Akses)",
+    "wa_admin": "",
+    "link_beli": "",
+    "info_bayar": "Mode Guru EduVerse terbuka gratis untuk seluruh guru Indonesia.",
+    "hari": 365,
+    "tenggang": 14,
+    "maks_kelas": 100,
+    "maks_perangkat": 25,
+    "daftar_sandi": "1",
+    "lama_mode": "seumur",
+    "lama_hari": 365,
+    "admin_kode": "eduverse123"
+  },
+  "guru": [
+    {
+      "id": 1,
+      "nama": "Guru EduVerse",
+      "email": "guru1@eduverse.id",
+      "sandi": "",
+      "wa": "",
+      "wa_norm": "",
+      "sekolah": "Sekolah EduVerse",
+      "google": false,
+      "status": "seumur",
+      "sampai": -1,
+      "tenggang_sampai": 0,
+      "maks_kelas": 100,
+      "maks_perangkat": 25,
+      "aktif": true,
+      "dibuat": 1793416188524,
+      "terakhir_masuk": 1793416188571,
+      "sess": [
+        "free-demo-teacher"
+      ],
+      "dev": [
+        "dev-demo-01"
+      ],
+      "soal_paket": null,
+      "soal_pk": "",
+      "soal_diubah": 0,
+      "bukti": "Akses Gratis EduVerse",
+      "catatan": "",
+      "total_bayar": 0
+    },
+    {
+      "id": 2,
+      "nama": "Guru EduVerse",
+      "email": "guru2@eduverse.id",
+      "sandi": "",
+      "wa": "",
+      "wa_norm": "",
+      "sekolah": "Sekolah EduVerse",
+      "google": false,
+      "status": "seumur",
+      "sampai": -1,
+      "tenggang_sampai": 0,
+      "maks_kelas": 100,
+      "maks_perangkat": 25,
+      "aktif": true,
+      "dibuat": 1793416396701,
+      "terakhir_masuk": 1793416532646,
+      "sess": [
+        "free-c29f5c257bd55f72ce1b2ae001ee928f"
+      ],
+      "dev": [
+        "c29f5c257bd55f72ce1b2ae001ee928f"
+      ],
+      "soal_paket": null,
+      "soal_pk": "",
+      "soal_diubah": 0,
+      "bukti": "Akses Gratis EduVerse",
+      "catatan": "",
+      "total_bayar": 0
+    }
+  ],
+  "paket": {
+    "RFLDGD": {
+      "kode": "RFLDGD",
+      "guru_id": 1,
+      "guru": "Tim EduVerse",
+      "sekolah": "Sekolah EduVerse",
+      "judul": "Paket Contoh EduVerse - SD/SMP",
+      "paket": {
+        "judul": "Paket Contoh EduVerse - SD/SMP",
+        "guru": "Tim EduVerse",
+        "jenjang": "SD Kelas 5",
+        "mapel": [
+          {
+            "id": "mtk",
+            "nama": "Matematika",
+            "warna": "#ef4444",
+            "waktu": 30,
+            "jumlah": 5,
+            "materi": [
+              {
+                "judul": "Mengenal Pecahan",
+                "jenis": "teks",
+                "isi": "Pecahan terdiri dari pembilang dan penyebut."
+              }
+            ],
+            "soal": [
+              {
+                "tipe": "pg",
+                "q": "Hasil dari 1/2 + 1/4 adalah ...",
+                "opsi": [
+                  "3/4",
+                  "2/6",
+                  "1/6",
+                  "2/4"
+                ],
+                "jawab": 0,
+                "bahas": "1/2 = 2/4, maka 2/4 + 1/4 = 3/4"
+              },
+              {
+                "tipe": "pg",
+                "q": "Hasil dari 6 x 8 adalah ...",
+                "opsi": [
+                  "48",
+                  "42",
+                  "54",
+                  "36"
+                ],
+                "jawab": 0,
+                "bahas": "6 x 8 = 48"
+              }
+            ]
+          }
+        ]
+      },
+      "diubah": 1793416188527,
+      "dibuka": 0,
+      "publik": true,
+      "bank": true,
+      "bank_t": 1793416188529,
+      "bank_pakai": 0
+    }
+  },
+  "kelas": {
+    "N3G2ZU": {
+      "kode": "N3G2ZU",
+      "guru_id": 1,
+      "nama": "Kelas 5A Nusantara",
+      "guru": "Bu Sari",
+      "pin": "123456",
+      "paket": {
+        "judul": "Paket Contoh EduVerse - SD/SMP",
+        "guru": "Tim EduVerse",
+        "jenjang": "SD Kelas 5",
+        "mapel": [
+          {
+            "id": "mtk",
+            "nama": "Matematika",
+            "warna": "#ef4444",
+            "waktu": 30,
+            "jumlah": 5,
+            "materi": [
+              {
+                "judul": "Mengenal Pecahan",
+                "jenis": "teks",
+                "isi": "Pecahan terdiri dari pembilang dan penyebut."
+              }
+            ],
+            "soal": [
+              {
+                "tipe": "pg",
+                "q": "Hasil dari 1/2 + 1/4 adalah ...",
+                "opsi": [
+                  "3/4",
+                  "2/6",
+                  "1/6",
+                  "2/4"
+                ],
+                "jawab": 0,
+                "bahas": "1/2 = 2/4, maka 2/4 + 1/4 = 3/4"
+              },
+              {
+                "tipe": "pg",
+                "q": "Hasil dari 6 x 8 adalah ...",
+                "opsi": [
+                  "48",
+                  "42",
+                  "54",
+                  "36"
+                ],
+                "jawab": 0,
+                "bahas": "6 x 8 = 48"
+              }
+            ]
+          }
+        ]
+      },
+      "paket_kode": "RFLDGD",
+      "diubah": 1793416188536,
+      "kunci": false,
+      "rekap": null,
+      "dibuat": 1793416188536
+    }
+  },
+  "murid": [
+    {
+      "id": 1,
+      "kelas_kode": "N3G2ZU",
+      "nama": "Budi",
+      "absen": 1,
+      "token": "29b224e050c9b49e0327b73c727ec7bf",
+      "aktif": 1793416188543,
+      "blokir": false
+    }
+  ],
+  "sesi": [
+    {
+      "id": 1,
+      "cid": "test-cid-1",
+      "kelas_kode": "N3G2ZU",
+      "murid_id": 1,
+      "mapel_id": "mtk",
+      "mapel_nama": "Matematika",
+      "benar": 2,
+      "total": 2,
+      "nilai": 100,
+      "durasi": 25,
+      "t": 1793416188542,
+      "dunia": "kota",
+      "tantangan_id": null,
+      "telat": 0,
+      "paket_kode": "RFLDGD",
+      "soal_lama": 0,
+      "skor": null,
+      "maks": null,
+      "lari": 0
+    }
+  ],
+  "jawaban": [
+    {
+      "kelas_kode": "N3G2ZU",
+      "murid_id": 1,
+      "mapel_id": "mtk",
+      "skey": "k1",
+      "q": "1/2 + 1/4",
+      "p": 0,
+      "k": 0,
+      "ok": 1,
+      "d": 5.2,
+      "t": 1793416188542,
+      "sesi_id": 1,
+      "j_json": ""
+    }
+  ],
+  "materi": [
+    {
+      "kelas_kode": "N3G2ZU",
+      "murid_id": 1,
+      "mapel_id": "mtk",
+      "idx": 0,
+      "t": 1793416188542
+    }
+  ],
+  "tantangan": [],
+  "tmulai": [],
+  "pendamping": [],
+  "bayar": [],
+  "kodes": [],
+  "cids": {
+    "test-cid-1": 1793416188543
+  }
+}
