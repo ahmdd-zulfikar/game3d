@@ -1,19 +1,19 @@
 {
   "version": 2,
   "rewrites": [
-    { "source": "/api/health", "destination": "/api/index.js?__path=/api/health" },
-    { "source": "/setelan", "destination": "/api/index.js?__path=/setelan" },
-    { "source": "/akun/:path*", "destination": "/api/index.js?__path=/akun/:path*" },
-    { "source": "/guru/:path*", "destination": "/api/index.js?__path=/guru/:path*" },
-    { "source": "/paket/:path*", "destination": "/api/index.js?__path=/paket/:path*" },
-    { "source": "/bank/:path*", "destination": "/api/index.js?__path=/bank/:path*" },
-    { "source": "/kelas/:path*", "destination": "/api/index.js?__path=/kelas/:path*" },
-    { "source": "/murid/:path*", "destination": "/api/index.js?__path=/murid/:path*" },
-    { "source": "/catat", "destination": "/api/index.js?__path=/catat" },
-    { "source": "/dashboard", "destination": "/api/index.js?__path=/dashboard" },
-    { "source": "/tantangan/:path*", "destination": "/api/index.js?__path=/tantangan/:path*" },
-    { "source": "/main/:path*", "destination": "/api/index.js?__path=/main/:path*" },
-    { "source": "/pendamping/:path*", "destination": "/api/index.js?__path=/pendamping/:path*" },
-    { "source": "/admin/:path*", "destination": "/api/index.js?__path=/admin/:path*" }
+    { "source": "/api/health", "destination": "/api/index.js?__p=/api/health" },
+    { "source": "/setelan", "destination": "/api/index.js?__p=/setelan" },
+    { "source": "/catat", "destination": "/api/index.js?__p=/catat" },
+    { "source": "/dashboard", "destination": "/api/index.js?__p=/dashboard" },
+    { "source": "/akun/:sub*", "destination": "/api/index.js?__sec=akun&__sub=:sub*" },
+    { "source": "/guru/:sub*", "destination": "/api/index.js?__sec=guru&__sub=:sub*" },
+    { "source": "/paket/:sub*", "destination": "/api/index.js?__sec=paket&__sub=:sub*" },
+    { "source": "/bank/:sub*", "destination": "/api/index.js?__sec=bank&__sub=:sub*" },
+    { "source": "/kelas/:sub*", "destination": "/api/index.js?__sec=kelas&__sub=:sub*" },
+    { "source": "/murid/:sub*", "destination": "/api/index.js?__sec=murid&__sub=:sub*" },
+    { "source": "/tantangan/:sub*", "destination": "/api/index.js?__sec=tantangan&__sub=:sub*" },
+    { "source": "/main/:sub*", "destination": "/api/index.js?__sec=main&__sub=:sub*" },
+    { "source": "/pendamping/:sub*", "destination": "/api/index.js?__sec=pendamping&__sub=:sub*" },
+    { "source": "/admin/:sub*", "destination": "/api/index.js?__sec=admin&__sub=:sub*" }
   ]
 }

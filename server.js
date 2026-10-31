@@ -1534,7 +1534,13 @@ async function requestHandler(req, res) {
   }
 
   const parsedUrl = new URL(req.url, `http://${req.headers.host || "localhost"}`);
-  const rawPath = parsedUrl.searchParams.get("__path") || parsedUrl.pathname;
+  let rawPath = parsedUrl.pathname;
+  if (parsedUrl.searchParams.get("__p")) {
+    rawPath = parsedUrl.searchParams.get("__p");
+  } else if (parsedUrl.searchParams.get("__sec")) {
+    const sub = parsedUrl.searchParams.get("__sub") || "";
+    rawPath = "/" + parsedUrl.searchParams.get("__sec") + (sub ? "/" + sub : "");
+  }
   const pathname = ("/" + String(rawPath).replace(/^\/+/, "")).replace(/\/+$/, "") || "/";
 
   // Health check for POST / or GET /?health=1 or /api/health
