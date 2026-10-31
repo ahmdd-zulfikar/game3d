@@ -6,13 +6,15 @@
 
 const http = require("http");
 const fs = require("fs");
+const os = require("os");
 const path = require("path");
 const crypto = require("crypto");
 const { WebSocketServer } = require("ws");
 
 const PORT = process.env.PORT || 3000;
+const IS_VERCEL = !!process.env.VERCEL;
 const PUBLIC_DIR = path.join(__dirname, "public");
-const DATA_DIR = path.join(__dirname, "data");
+const DATA_DIR = IS_VERCEL ? path.join(os.tmpdir(), "eduverse-data") : path.join(__dirname, "data");
 const DB_FILE = path.join(DATA_DIR, "db.json");
 
 if (!fs.existsSync(DATA_DIR)) {
@@ -69,17 +71,24 @@ if (fs.existsSync(DB_FILE)) {
 }
 
 let saveTimer = null;
+function writeDBNow() {
+  try {
+    const tmp = DB_FILE + ".tmp";
+    fs.writeFileSync(tmp, JSON.stringify(DB, null, 2), "utf8");
+    fs.renameSync(tmp, DB_FILE);
+  } catch (e) {
+    console.error("Gagal menyimpan db.json:", e.message);
+  }
+}
 function saveDB() {
+  if (IS_VERCEL) {
+    writeDBNow();
+    return;
+  }
   if (saveTimer) return;
   saveTimer = setTimeout(() => {
     saveTimer = null;
-    try {
-      const tmp = DB_FILE + ".tmp";
-      fs.writeFileSync(tmp, JSON.stringify(DB, null, 2), "utf8");
-      fs.renameSync(tmp, DB_FILE);
-    } catch (e) {
-      console.error("Gagal menyimpan db.json:", e.message);
-    }
+    writeDBNow();
   }, 300);
 }
 
@@ -1505,7 +1514,16 @@ async function handleApi(req, res, pathname, query) {
   return sendJson(res, 404, { error: "Alamat tidak ditemukan" });
 }
 
-const server = http.createServer(async (req, res) => {
+async function requestHandler(req, res) {
+  if (IS_VERCEL && fs.existsSync(DB_FILE)) {
+    try {
+      const raw = JSON.parse(fs.readFileSync(DB_FILE, "utf8"));
+      DB = Object.assign(defaultDB(), raw);
+      DB.seq = Object.assign(defaultDB().seq, raw.seq || {});
+      DB.setelan = Object.assign(defaultDB().setelan, raw.setelan || {});
+    } catch (e) {}
+  }
+
   if (req.method === "OPTIONS") {
     res.writeHead(204, {
       "Access-Control-Allow-Origin": "*",
@@ -1518,8 +1536,8 @@ const server = http.createServer(async (req, res) => {
   const parsedUrl = new URL(req.url, `http://${req.headers.host || "localhost"}`);
   const pathname = parsedUrl.pathname.replace(/\/+$/, "") || "/";
 
-  // Health check for POST / or GET /?health=1
-  if (pathname === "/" && (req.method === "POST" || parsedUrl.searchParams.has("health"))) {
+  // Health check for POST / or GET /?health=1 or /api/health
+  if ((pathname === "/" || pathname === "/api/health") && (req.method === "POST" || parsedUrl.searchParams.has("health") || pathname === "/api/health")) {
     return sendJson(res, 200, { ok: true, app: "EduVerse Server", version: "1.0.0" });
   }
 
@@ -1555,7 +1573,9 @@ const server = http.createServer(async (req, res) => {
     "Cache-Control": "no-cache"
   });
   fs.createReadStream(filePath).pipe(res);
-});
+}
+
+const server = http.createServer(requestHandler);
 
 /* =====================================================================
    REALTIME WEBSOCKET SERVER (/kelas)
@@ -1861,11 +1881,15 @@ wss.on("connection", (ws, parsedUrl) => {
   });
 });
 
-server.listen(PORT, () => {
-  console.log("======================================================");
-  console.log("🚀 EduVerse - Semesta Belajar 3D Server Aktif!");
-  console.log(`🌐 Buka di browser : http://localhost:${PORT}`);
-  console.log(`👩‍🏫 Panduan Guru    : http://localhost:${PORT}/guru.html`);
-  console.log(`🔐 Dashboard Admin : http://localhost:${PORT}/admin.html (Kode: eduverse123)`);
-  console.log("======================================================");
-});
+if (require.main === module) {
+  server.listen(PORT, () => {
+    console.log("======================================================");
+    console.log("🚀 EduVerse - Semesta Belajar 3D Server Aktif!");
+    console.log(`🌐 Buka di browser : http://localhost:${PORT}`);
+    console.log(`👩‍🏫 Panduan Guru    : http://localhost:${PORT}/guru.html`);
+    console.log(`🔐 Dashboard Admin : http://localhost:${PORT}/admin.html (Kode: eduverse123)`);
+    console.log("======================================================");
+  });
+}
+
+module.exports = requestHandler;

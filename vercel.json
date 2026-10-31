@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/api/health", "destination": "/api/index.js" },
+    { "source": "/setelan", "destination": "/api/index.js" },
+    { "source": "/akun/:path*", "destination": "/api/index.js" },
+    { "source": "/guru/:path*", "destination": "/api/index.js" },
+    { "source": "/paket/:path*", "destination": "/api/index.js" },
+    { "source": "/bank/:path*", "destination": "/api/index.js" },
+    { "source": "/kelas/:path*", "destination": "/api/index.js" },
+    { "source": "/murid/:path*", "destination": "/api/index.js" },
+    { "source": "/catat", "destination": "/api/index.js" },
+    { "source": "/dashboard", "destination": "/api/index.js" },
+    { "source": "/tantangan/:path*", "destination": "/api/index.js" },
+    { "source": "/main/:path*", "destination": "/api/index.js" },
+    { "source": "/pendamping/:path*", "destination": "/api/index.js" },
+    { "source": "/admin/:path*", "destination": "/api/index.js" }
+  ]
+}

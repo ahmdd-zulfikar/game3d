@@ -2851,7 +2851,7 @@ function kelasTabHTML(){var h="";
  return h}
 function kelasAct(a,b){
  var gk=lsGet(LS_GK,[]),c=gk[+b.dataset.ki];
- if(a==="apiset"){var v=$("apiIn").value.trim().replace(/\/+$/,"");if(v&&!/^https?:\/\//i.test(v)){gmsg("Alamat harus diawali http:// atau https://","#ff8a80");return true}API_URL=v;lsSet("zd2_api",v);if(!v){gmsg("Alamat server dihapus.");renderGuru();return true}gmsg("Mengecek server...");api("/").then(function(){gmsg("✔ Server terhubung.","#7dffa0");renderGuru()},function(e){gmsg("❌ "+e.message,"#ff8a80")});return true}
+ if(a==="apiset"){var v=$("apiIn").value.trim().replace(/\/+$/,"");if(v&&!/^https?:\/\//i.test(v)){gmsg("Alamat harus diawali http:// atau https://","#ff8a80");return true}API_URL=v;lsSet("zd2_api",v);if(!v){gmsg("Alamat server dihapus.");renderGuru();return true}gmsg("Mengecek server...");api("/setelan").then(function(){gmsg("✔ Server terhubung.","#7dffa0");renderGuru()},function(e){gmsg("❌ "+e.message,"#ff8a80")});return true}
  if(a==="mkkelas"){var nm=$("kNama").value.trim(),gu=$("kGuru").value.trim(),pin=$("kPin").value.trim();if(!nm){gmsg("Isi nama kelas.","#ff8a80");return true}if(!/^\d{6,10}$/.test(pin)){gmsg("PIN harus 6 sampai 10 angka.","#ff8a80");return true}
   try{validate(normalize(draft))}catch(er){gmsg("❌ "+er.message,"#ff8a80");return true}if(dirty)applyDraft();
   gmsg("Membuat kelas...");var pkdC="";pkEnsure().then(function(pkd){pkdC=pkd;return api("/kelas/buat",{lic:licBody(),nama:nm,guru:gu,pin:pin,paket:exportPack(),paket_kode:pkd})}).then(function(r){var g=lsGet(LS_GK,[]);g.unshift({kode:r.kode,nama:nm,pin:pin,pk:pkdC||""});lsSet(LS_GK,g);KNEW=r.kode;renderGuru();gmsg("✔ Kelas dibuat! Kode kelas: "+r.kode+". Sekarang kirim link ke murid.","#7dffa0")},function(e){gmsg("❌ "+e.message,"#ff8a80")});return true}
@@ -5087,7 +5087,7 @@ function buildTiongkok(){setEnv("tiongkok");W_ground("#7a9a5f",["rgba(60,90,40,.
 /* =================================================================
    MAIN BERSAMA (multiplayer teman sekelas)
    ================================================================= */
-var RT_DEFAULT=/\.github\.io$/i.test(location.hostname)?"":((location.protocol==="https:"?"wss://":"ws://")+location.host);
+var RT_DEFAULT=/\.(github\.io|vercel\.app)$/i.test(location.hostname)?"":((location.protocol==="https:"?"wss://":"ws://")+location.host);
 var RT_URL=(function(){var q=null;try{q=new URLSearchParams(location.search).get("rt")}catch(e){}if(q!=null){lsSet("zd2_rt",q);return q}var s=lsGet("zd2_rt",null);if(s&&/alizaenalproject\.workers\.dev/i.test(s)){s=null;lsSet("zd2_rt",null)}return s!=null?s:RT_DEFAULT})();
 var RT={ws:null,on:false,retry:0,tm:null,stop:false,peers:{},roster:[],me:null,lastP:null,lastSend:0,scSig:"",chk:0,self:{emo:null,et:0},oT:null};
 var EMO_LIST=["👋","😀","👍","🎉","❤️","🤔","😮","💪"],FRASA=["Ayo ke gedung mapel!","Ayo belajar bareng!","Selamat ya!","Aku butuh bantuan","Ikuti aku!","Terima kasih!"];
