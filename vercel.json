@@ -1,19 +1,19 @@
 {
   "version": 2,
   "rewrites": [
-    { "source": "/api/health", "destination": "/api/index.js" },
-    { "source": "/setelan", "destination": "/api/index.js" },
-    { "source": "/akun/:path*", "destination": "/api/index.js" },
-    { "source": "/guru/:path*", "destination": "/api/index.js" },
-    { "source": "/paket/:path*", "destination": "/api/index.js" },
-    { "source": "/bank/:path*", "destination": "/api/index.js" },
-    { "source": "/kelas/:path*", "destination": "/api/index.js" },
-    { "source": "/murid/:path*", "destination": "/api/index.js" },
-    { "source": "/catat", "destination": "/api/index.js" },
-    { "source": "/dashboard", "destination": "/api/index.js" },
-    { "source": "/tantangan/:path*", "destination": "/api/index.js" },
-    { "source": "/main/:path*", "destination": "/api/index.js" },
-    { "source": "/pendamping/:path*", "destination": "/api/index.js" },
-    { "source": "/admin/:path*", "destination": "/api/index.js" }
+    { "source": "/api/health", "destination": "/api/index.js?__path=/api/health" },
+    { "source": "/setelan", "destination": "/api/index.js?__path=/setelan" },
+    { "source": "/akun/:path*", "destination": "/api/index.js?__path=/akun/:path*" },
+    { "source": "/guru/:path*", "destination": "/api/index.js?__path=/guru/:path*" },
+    { "source": "/paket/:path*", "destination": "/api/index.js?__path=/paket/:path*" },
+    { "source": "/bank/:path*", "destination": "/api/index.js?__path=/bank/:path*" },
+    { "source": "/kelas/:path*", "destination": "/api/index.js?__path=/kelas/:path*" },
+    { "source": "/murid/:path*", "destination": "/api/index.js?__path=/murid/:path*" },
+    { "source": "/catat", "destination": "/api/index.js?__path=/catat" },
+    { "source": "/dashboard", "destination": "/api/index.js?__path=/dashboard" },
+    { "source": "/tantangan/:path*", "destination": "/api/index.js?__path=/tantangan/:path*" },
+    { "source": "/main/:path*", "destination": "/api/index.js?__path=/main/:path*" },
+    { "source": "/pendamping/:path*", "destination": "/api/index.js?__path=/pendamping/:path*" },
+    { "source": "/admin/:path*", "destination": "/api/index.js?__path=/admin/:path*" }
   ]
 }

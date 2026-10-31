@@ -1534,7 +1534,8 @@ async function requestHandler(req, res) {
   }
 
   const parsedUrl = new URL(req.url, `http://${req.headers.host || "localhost"}`);
-  const pathname = parsedUrl.pathname.replace(/\/+$/, "") || "/";
+  const rawPath = parsedUrl.searchParams.get("__path") || parsedUrl.pathname;
+  const pathname = ("/" + String(rawPath).replace(/^\/+/, "")).replace(/\/+$/, "") || "/";
 
   // Health check for POST / or GET /?health=1 or /api/health
   if ((pathname === "/" || pathname === "/api/health") && (req.method === "POST" || parsedUrl.searchParams.has("health") || pathname === "/api/health")) {
