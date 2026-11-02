@@ -983,6 +983,91 @@ async function handleApi(req, res, pathname, query) {
     return sendJson(res, 200, { ok: true, ann: k.ann });
   }
 
+  if (pathname === "/kelas/gerak") {
+    const now = Date.now();
+    let k = null;
+    let meId = "";
+    if (body.guru) {
+      const chk = checkKelasAccess(body.lic, body.kode, body.pin, true);
+      if (chk.error) return sendJson(res, chk.status || 403, { error: chk.error, kode: chk.kode });
+      k = chk.kelas;
+      meId = "g1";
+      if (body.inGame) {
+        const prevEmo = k.guru_3d && k.guru_3d.emo && now - k.guru_3d.emo.at < 4500 ? k.guru_3d.emo : null;
+        k.guru_3d = {
+          id: "g1",
+          g: true,
+          nama: String(body.nama || k.guru || "Guru").slice(0, 24),
+          z: String(body.z || "kota").slice(0, 24),
+          o: body.o && typeof body.o === "object" ? body.o : (k.guru_3d && k.guru_3d.o) || null,
+          p: Array.isArray(body.p) && body.p.length === 4 ? body.p.map(v => Math.round((Number(v) || 0) * 100) / 100) : [0, 0, 0, 0],
+          lv: 99,
+          sc: { lv: 99, bh: 0, g: 0 },
+          st: { s: "main", m: "" },
+          aktif: now,
+          emo: body.emo ? { e: String(body.emo).slice(0, 60), at: now } : prevEmo
+        };
+      } else if (body.leaveGame && k.guru_3d) {
+        k.guru_3d = null;
+      }
+    } else {
+      const kode = String(body.kode || "").trim().toUpperCase();
+      const token = String(body.token || "").trim();
+      k = DB.kelas[kode];
+      if (!k) return sendJson(res, 404, { error: "Kelas tidak ditemukan." });
+      const m = DB.murid.find(x => x.kelas_kode === kode && x.token === token);
+      if (!m) return sendJson(res, 401, { error: "Murid tidak dikenali." });
+      if (m.blokir) return sendJson(res, 403, { error: "Kamu dikeluarkan dari kelas.", kode: "blokir" });
+      meId = String(m.id);
+      m.aktif = now;
+      if (body.z) m.z = String(body.z).slice(0, 24);
+      if (body.o && typeof body.o === "object") m.o = body.o;
+      if (Array.isArray(body.p) && body.p.length === 4) {
+        m.p = body.p.map(v => Math.round((Number(v) || 0) * 100) / 100);
+      }
+      if (body.sc && typeof body.sc === "object") {
+        m.sc = { lv: Number(body.sc.lv) || 1, bh: Number(body.sc.bh) || 0, g: Number(body.sc.g) || 0 };
+      }
+      if (body.st && typeof body.st === "object") {
+        m.st = { s: String(body.st.s || "main").slice(0, 16), m: String(body.st.m || "").slice(0, 40), q: body.st.q || null };
+      }
+      if (body.siap !== undefined) {
+        m.siap_id = Number(body.siap) || 0;
+        m.siap_t = m.siap_id ? now : 0;
+      }
+      if (body.emo) {
+        m.emo = { e: String(body.emo).slice(0, 60), at: now };
+      }
+    }
+    saveDB();
+    const roster = DB.murid
+      .filter(x => !x.blokir && x.kelas_kode === k.kode && now - (x.aktif || 0) < 35000)
+      .sort((a, b) => a.absen - b.absen)
+      .map(x => {
+        const siap = x.siap_id && now - (x.siap_t || 0) < 35000 ? x.siap_id : 0;
+        const sc = x.sc || { lv: 1, bh: 0, g: 0 };
+        return {
+          id: x.id,
+          nama: x.nama,
+          absen: x.absen,
+          g: false,
+          z: x.z || (siap ? "lobi" + siap : "kota"),
+          o: x.o || null,
+          p: x.p || [0, 0, 0, 0],
+          lv: sc.lv || 1,
+          sc,
+          st: x.st || (siap ? { s: "lobi", m: "" } : { s: "main", m: "" }),
+          siap,
+          emo: x.emo && now - x.emo.at < 4500 ? x.emo : null
+        };
+      });
+    if (k.guru_3d && now - (k.guru_3d.aktif || 0) < 35000) {
+      roster.push(k.guru_3d);
+    }
+    const ann = k.ann && now - k.ann.at < 180000 ? k.ann : null;
+    return sendJson(res, 200, { now, me: meId, roster, ann });
+  }
+
   if (pathname.startsWith("/kelas/")) {
     const kode = pathname.slice("/kelas/".length).trim().toUpperCase();
     const k = DB.kelas[kode];
@@ -1214,7 +1299,12 @@ async function handleApi(req, res, pathname, query) {
         absen: m.absen,
         aktif: m.aktif,
         blokir: !!m.blokir,
-        siap: m.siap_id && now - (m.siap_t || 0) < 35000 ? m.siap_id : 0
+        siap: m.siap_id && now - (m.siap_t || 0) < 35000 ? m.siap_id : 0,
+        z: m.z || "kota",
+        st: m.st || null,
+        sc: m.sc || null,
+        p: m.p || null,
+        o: m.o || null
       }));
 
     const sesi = DB.sesi
