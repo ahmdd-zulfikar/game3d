@@ -3111,19 +3111,20 @@ function xlStat(rows,lbls,vals,K){if(!vals.length)return;var a=avg(vals);rows.pu
 /* =================================================================
    TANTANGAN / UJIAN (murid)
    ================================================================= */
-var TAN={list:[],off:0},tanSeen=lsGet("zv_tan_seen",{});
+var TAN={list:[],off:0},tanSeen=lsGet("zv_tan_seen",{}),lastAnnId=0;
+function chkHttpAnn(a){if(!a||!a.id||a.id<=lastAnnId||GURU)return;lastAnnId=a.id;if(a.call&&!tanCurId())showAnn('<b>📣 '+esc(a.nama)+' memanggilmu!</b><div style="margin-top:4px">Guru menunggu di '+esc(zoneLabel(a.z||"kota"))+'.</div><div class="row" style="margin-top:8px;justify-content:center"><button class="btn sm yel" data-goz="'+esc(a.z||"kota")+'">🚶 Datangi Guru</button><button class="btn sm gray" data-annx>Nanti</button></div>',20000);else showAnn('<b>📢 '+esc(a.nama)+'</b><div style="margin-top:4px">'+esc(a.text)+'</div><button class="btn sm gray" data-annx style="margin-top:8px">Tutup</button>',12000)}
 function srv(){return Date.now()+TAN.off}
 function tanStatus(t){var n=srv();if(t.sudah&&t.sekali)return"sudah";
  if(t.serentak){if(n>t.selesai||(t.akhir&&n>t.akhir))return t.sudah?"sudah":"tutup";if(!t.go)return"tunggu";if(t.dimulai&&t.sekali&&t.dimulai>=t.go&&n>Math.min(t.selesai,t.go+t.menit*60000))return"habis";if(n>Math.min(t.selesai,t.go+t.menit*60000))return t.sudah?"sudah":"tutup";return"buka"}
  if(n<t.mulai)return"nanti";if(n>t.selesai)return t.sudah?"sudah":"tutup";if(t.dimulai&&t.sekali&&n>Math.min(t.selesai,t.dimulai+t.menit*60000))return"habis";return"buka"}
-function tanLoad(){if(!CL||!API_URL)return Promise.resolve();return api("/tantangan/daftar",{kode:CL.kode,token:CL.token}).then(function(r){TAN.off=r.now-Date.now();TAN.list=r.tantangan||[];updTanUI()}).catch(function(){})}
+function tanLoad(){if(!CL||!API_URL)return Promise.resolve();return api("/tantangan/daftar",{kode:CL.kode,token:CL.token}).then(function(r){TAN.off=r.now-Date.now();TAN.list=r.tantangan||[];if(r.ann)chkHttpAnn(r.ann);updTanUI()}).catch(function(){})}
 var TINV={};
 function tanInvite(){if(!CL||WAIT||LOBI||ADV&&!ADV.done||mode!=="play")return;var t=TAN.list.filter(function(x){return x.serentak&&!x.go&&!x.akhir&&!TINV[x.id]&&tanStatus(x)==="tunggu"})[0];if(!t)return;TINV[t.id]=1;
  ask("Gurumu membuka \""+t.judul+"\". Masuk ke lobi sekarang dan tunggu aba-aba mulai bersama teman?",function(){mainEnter(t)},{ic:(TMODE[tanModeOf(t)]||TMODE.kuis).ic,t:"Ajakan dari guru",ok:"🛫 Masuk lobi",no:"Nanti"})}
 function updTanUI(){setTimeout(tanInvite,600);var open=CL?TAN.list.filter(function(t){var s=tanStatus(t);return s==="buka"||s==="tunggu"}):[],b=$("hTan");b.style.display=open.length?"block":"none";b.textContent="⚡ "+open.length+" Tantangan";$("pTan").style.display=CL&&TAN.list.length?"block":"none";
  open.forEach(function(t){if(!tanSeen[t.id]){tanSeen[t.id]=1;lsSet("zv_tan_seen",tanSeen);if(mode==="play"||mode==="menu")toast("⚡ Tantangan dari guru: "+t.judul+". Ketuk tombol ⚡ di kanan atas.",5000)}});
  if($("ovTan").classList.contains("show"))renderTan()}
-setInterval(function(){if(CL&&!document.hidden&&mode!=="quiz"&&mode!=="landing")tanLoad()},120000);
+setInterval(function(){if(CL&&!document.hidden&&mode!=="quiz"&&mode!=="landing")tanLoad()},15000);
 function fmtD(t){return new Date(t).toLocaleString("id-ID",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}
 function openTan(){if(mode==="play")setMode("menu");$("ovTan").classList.add("show");renderTan();tanLoad()}
 function renderTan(){$("tSub").textContent=CL?"🏫 "+CL.kelas+". Kerjakan sendiri dengan jujur dan teliti, ya!":"Masuk kelas dulu untuk melihat tantangan dari guru.";
@@ -3632,7 +3633,7 @@ function lobiOff(){return LOBI?LOBI.O:ARENA?ARENA.O:null}
 var WAIT=null;
 function waitEnter(t,siap0){WAIT={id:t.id,t:t,tm:null,go:false,siap:siap0||1};if(lobiOk()&&P.settings.lobi!==false){lobiEnter(t);rtSend({t:"siap",id:t.id});waitUpd(siap0);waitPoll();SFX.click();return}setMode("menu");$("wTitle").textContent="⚡ "+t.judul;$("wInfo").textContent="📚 "+(t.mapel_nama||"")+" • "+t.jumlah+" soal • "+t.menit+" menit";$("wCount").textContent="";$("wBig").textContent="⏳";$("wMsg").textContent="Menunggu guru menekan Mulai...";$("ovWait").classList.add("show");rtSend({t:"siap",id:t.id});waitUpd(siap0);waitPoll();SFX.click()}
 function waitUpd(s){if(!WAIT||WAIT.go)return;if(s)WAIT.siap=s;var n=Math.max(RT.roster.filter(function(r){return!r.g&&r.siap===WAIT.id}).length,WAIT.siap||1);if(LOBI)lobiCount(n);$("wCount").textContent=(RT.on||WAIT.siap)?"👥 "+Math.max(1,n)+" teman sudah di ruang tunggu":"📡 Tetap di sini. Tantangan akan dimulai otomatis."}
-function waitPoll(){if(!WAIT)return;clearTimeout(WAIT.tm);WAIT.tm=setTimeout(function(){if(!WAIT||WAIT.go)return;rtSend({t:"siap",id:WAIT.id});api("/tantangan/mulai",{kode:CL.kode,token:CL.token,id:WAIT.id}).then(function(r){if(!WAIT||WAIT.go)return;if(r.tunggu){waitUpd(r.siap);waitPoll()}else waitGo(r)},function(er){toast("❌ "+er.message,4000);waitLeave()})},RT.on?25000:5000)}
+function waitPoll(){if(!WAIT)return;clearTimeout(WAIT.tm);WAIT.tm=setTimeout(function(){if(!WAIT||WAIT.go)return;rtSend({t:"siap",id:WAIT.id});api("/tantangan/mulai",{kode:CL.kode,token:CL.token,id:WAIT.id}).then(function(r){if(!WAIT||WAIT.go)return;if(r.ann)chkHttpAnn(r.ann);if(r.tunggu){waitUpd(r.siap);waitPoll()}else waitGo(r)},function(er){toast("❌ "+er.message,4000);waitLeave()})},RT.on?25000:5000)}
 function waitLeave(){if(!WAIT)return;var wid=WAIT.id;clearTimeout(WAIT.tm);WAIT=null;rtSend({t:"siap",id:0});if(CL&&wid)api("/tantangan/mulai",{kode:CL.kode,token:CL.token,id:wid,batal:1}).catch(function(){});if(LOBI)lobiLeave(true);$("ovWait").classList.remove("show");if(mode==="menu")setMode("play")}
 function waitGo(pre){if(!WAIT||WAIT.go)return;WAIT.go=true;clearTimeout(WAIT.tm);var t=WAIT.t,n=3;$("wMsg").textContent="Bersiap!";$("wCount").textContent="";
  if(LOBI){$("lobiTxt").innerHTML="<b>🚀 Guru menekan Mulai!</b><small>Bersiap terjun…</small>";$("lobiOut").style.display="none"}
@@ -4116,7 +4117,7 @@ function tanAct(a,b){var id=+b.dataset.tid,t=(DB_.tantangan||[]).filter(function
  if(a==="certprint"){certPrint();return true}
  if(a==="rkcsv"){rkCsv();return true}
  if(a==="rkprint"){rkPrint();return true}
- if(a==="lvann"){var tx=$("lvAnn").value.trim();if(!tx){toast("Tulis pengumuman dulu");return true}if(!LV.on){toast("Belum terhubung ke server main bersama");return true}try{LV.ws.send(JSON.stringify({t:"ann",text:tx}))}catch(e){}$("lvAnn").value="";return true}
+ if(a==="lvann"){var tx=$("lvAnn").value.trim();if(!tx){toast("Tulis pengumuman dulu");return true}$("lvAnn").value="";if(LV.on){try{LV.ws.send(JSON.stringify({t:"ann",text:tx}))}catch(e){}}api("/kelas/pengumuman",{lic:licBody(),kode:dState.kode,pin:dState.pin,text:tx}).then(function(r){if(!LV.on&&r.ann){LV.ev.unshift({ann:1,nama:r.ann.nama,text:r.ann.text,at:r.ann.at});LV.ev=LV.ev.slice(0,400);lvRender()}toast("📢 Pengumuman terkirim ke murid",2500)},function(er){if(!LV.on)toast("❌ "+er.message,3500)});return true}
  if(a==="lvplay"){startGuruPlay();return true}
  if(a==="mdelsel"){var ids=Object.keys(dState.msel||{}).map(Number).filter(function(id){return DB_.murid.some(function(u){return u.id===id})});if(!ids.length)return true;var nm=DB_.murid.filter(function(u){return ids.indexOf(u.id)>=0}).map(function(u){return u.absen+". "+u.nama});
   ask(ids.length+" murid beserta semua nilainya akan dihapus: "+nm.slice(0,8).join(", ")+(nm.length>8?", dan "+(nm.length-8)+" lainnya":"")+". Mereka bisa masuk lagi dengan nomor absen yang sama. Ini tidak bisa dibatalkan.",function(){api("/murid/hapus",{lic:licBody(),kode:dState.kode,pin:dState.pin,ids:ids}).then(function(){dState.msel={};toast("🗑 "+ids.length+" murid dihapus",3000);return loadDash(false)},function(er){info(er.message)})},{t:"Hapus "+ids.length+" murid?",ok:"Hapus",danger:true});return true}
@@ -5173,7 +5174,7 @@ function rtGuruMsg(d){
  if(d.t==="ev"){if(GURU)toast("✅ "+d.nama+" menyelesaikan "+(d.k==="tantangan"?"tantangan ":"kuis ")+d.m+" (nilai "+d.n+")",3500);return true}
  if(d.t==="st")return true;
  return false}
-function updGuruUI(){var on=!!GURU;$("hGuru").style.display=on?"block":"none";$("bGuruT").style.display=on?"":"none";if(on)$("hGuru").textContent="👩‍🏫 Mode Guru"+(RT.on?" • terhubung":" • menghubungkan...");
+function updGuruUI(){var on=!!GURU;$("hGuru").style.display=on?"block":"none";$("bGuruT").style.display=on?"":"none";if(on)$("hGuru").textContent="👩‍🏫 Mode Guru"+(RT.on?" • terhubung":RT_URL?" • menghubungkan...":"");
  Array.prototype.forEach.call(document.querySelectorAll(".gonly"),function(x){x.style.display=on?"":"none"});if(!on)$("guruPanel").classList.remove("show");$("tracker").style.display=on?"none":"";railUpd()}
 function startGuruPlay(){if(!DB_)return;GURU={kode:dState.kode,pin:dState.pin,nama:DB_.kelas.guru||(LIC&&LIC.nama)||"Guru",kelas:DB_.kelas.nama};lvClose();clearInterval(dTimer);$("ovDash").classList.remove("show");$("ovGuru").classList.remove("show");
  RT.stop=false;rtClose();if(!P.name)P.name=GURU.nama;P.tipsShown=true;save();updGuruUI();
@@ -5181,8 +5182,8 @@ function startGuruPlay(){if(!DB_)return;GURU={kode:dState.kode,pin:dState.pin,na
  toast("👩‍🏫 Mode guru aktif. Murid melihat avatarmu, tetapi kamu tidak mengerjakan soal.",5000)}
 function exitGuru(){GURU=null;rtClose();RT.stop=false;updGuruUI();goLanding();toast("Kamu keluar dari mode guru")}
 $("bGuruT").onclick=function(){$("guruPanel").classList.toggle("show");$("emoPanel").classList.remove("show")};
-$("gpSend").onclick=function(){var t=$("gpAnn").value.trim();if(!t){toast("Tulis pengumuman dulu");return}if(!RT.on){toast("Belum terhubung ke server main bersama");return}rtSend({t:"ann",text:t});$("gpAnn").value="";$("guruPanel").classList.remove("show")};
-$("gpCall").onclick=function(){if(!RT.on){toast("Belum terhubung ke server main bersama");return}rtSend({t:"call"});toast("📣 Panggilan terkirim ke semua murid",3000);$("guruPanel").classList.remove("show")};
+$("gpSend").onclick=function(){var t=$("gpAnn").value.trim();if(!t){toast("Tulis pengumuman dulu");return}if(RT.on)rtSend({t:"ann",text:t});if(GURU)api("/kelas/pengumuman",{lic:licBody(),kode:GURU.kode,pin:GURU.pin,text:t}).then(function(){if(!RT.on)toast("📢 Pengumuman terkirim ke murid",2500)}).catch(function(){});$("gpAnn").value="";$("guruPanel").classList.remove("show")};
+$("gpCall").onclick=function(){if(RT.on)rtSend({t:"call"});if(GURU)api("/kelas/pengumuman",{lic:licBody(),kode:GURU.kode,pin:GURU.pin,text:"Ayo berkumpul ke tempat Guru!",z:CUR.z,call:true}).catch(function(){});toast("📣 Panggilan terkirim ke semua murid",3000);$("guruPanel").classList.remove("show")};
 $("gpOnline").onclick=function(){$("guruPanel").classList.remove("show");openOnline()};
 $("gpExit").onclick=function(){ask("Kamu akan kembali ke halaman awal.",exitGuru,{ic:"👩‍🏫",t:"Keluar dari mode guru?",ok:"Keluar"})};
 

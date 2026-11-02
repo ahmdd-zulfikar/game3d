@@ -964,6 +964,25 @@ async function handleApi(req, res, pathname, query) {
     return sendJson(res, 200, { rekap: chk.kelas.rekap });
   }
 
+  if (pathname === "/kelas/pengumuman") {
+    const chk = checkKelasAccess(body.lic, body.kode, body.pin, true);
+    if (chk.error) return sendJson(res, chk.status || 403, { error: chk.error });
+    const k = chk.kelas;
+    const text = String(body.text || "").trim().slice(0, 140);
+    if (!text) return sendJson(res, 400, { error: "Tulis pengumuman dulu." });
+    const now = Date.now();
+    k.ann = {
+      id: now,
+      nama: k.guru || "Guru",
+      text,
+      z: String(body.z || "kota"),
+      call: !!body.call,
+      at: now
+    };
+    saveDB();
+    return sendJson(res, 200, { ok: true, ann: k.ann });
+  }
+
   if (pathname.startsWith("/kelas/")) {
     const kode = pathname.slice("/kelas/".length).trim().toUpperCase();
     const k = DB.kelas[kode];
@@ -1294,8 +1313,11 @@ async function handleApi(req, res, pathname, query) {
     const m = DB.murid.find(x => x.kelas_kode === kode && x.token === token);
     if (!m) return sendJson(res, 401, { error: "Murid tidak dikenali." });
     if (m.blokir) return sendJson(res, 403, { error: "Kamu dikeluarkan dari kelas.", kode: "blokir" });
-    m.aktif = Date.now();
+    const now = Date.now();
+    m.aktif = now;
     saveDB();
+    const k = DB.kelas[kode];
+    const ann = k && k.ann && now - k.ann.at < 180000 ? k.ann : null;
 
     const list = DB.tantangan
       .filter(t => t.kelas_kode === kode && t.aktif)
@@ -1318,7 +1340,7 @@ async function handleApi(req, res, pathname, query) {
         });
       });
 
-    return sendJson(res, 200, { now: Date.now(), tantangan: list });
+    return sendJson(res, 200, { now, tantangan: list, ann });
   }
 
   if (pathname === "/tantangan/simpan") {
@@ -1426,7 +1448,8 @@ async function handleApi(req, res, pathname, query) {
       const siapCount = DB.murid.filter(
         x => !x.blokir && x.kelas_kode === kode && x.siap_id === t.id && now - (x.siap_t || 0) < 35000
       ).length;
-      return sendJson(res, 200, { now, tunggu: true, siap: Math.max(1, siapCount) });
+      const ann = k && k.ann && now - k.ann.at < 180000 ? k.ann : null;
+      return sendJson(res, 200, { now, tunggu: true, siap: Math.max(1, siapCount), ann });
     }
     if (!t.serentak && now < t.mulai) {
       return sendJson(res, 400, { error: "Tantangan belum dibuka." });
