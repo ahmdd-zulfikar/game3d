@@ -1,8 +1,8 @@
 {
   "seq": {
-    "guru": 3,
-    "murid": 4,
-    "sesi": 3,
+    "guru": 4,
+    "murid": 5,
+    "sesi": 4,
     "tantangan": 3,
     "pendamping": 1,
     "bayar": 1,
@@ -70,7 +70,7 @@
       "maks_perangkat": 25,
       "aktif": true,
       "dibuat": 1793416396701,
-      "terakhir_masuk": 1793621423524,
+      "terakhir_masuk": 1793631262917,
       "sess": [
         "free-c29f5c257bd55f72ce1b2ae001ee928f"
       ],
@@ -562,6 +562,36 @@
       },
       "soal_pk": "RPETLM",
       "soal_diubah": 1793619253585,
+      "bukti": "Akses Gratis EduVerse",
+      "catatan": "",
+      "total_bayar": 0
+    },
+    {
+      "id": 3,
+      "nama": "Guru EduVerse",
+      "email": "guru3@eduverse.id",
+      "sandi": "",
+      "wa": "",
+      "wa_norm": "",
+      "sekolah": "Sekolah EduVerse",
+      "google": false,
+      "status": "seumur",
+      "sampai": -1,
+      "tenggang_sampai": 0,
+      "maks_kelas": 100,
+      "maks_perangkat": 25,
+      "aktif": true,
+      "dibuat": 1793631287181,
+      "terakhir_masuk": 1793631287188,
+      "sess": [
+        "free-543a21faab875f8abc2cb3bd6739b138"
+      ],
+      "dev": [
+        "543a21faab875f8abc2cb3bd6739b138"
+      ],
+      "soal_paket": null,
+      "soal_pk": "",
+      "soal_diubah": 0,
       "bukti": "Akses Gratis EduVerse",
       "catatan": "",
       "total_bayar": 0
@@ -1684,7 +1714,7 @@
         "id": "g1",
         "g": true,
         "nama": "Pak Zul",
-        "z": "lobi2",
+        "z": "ar1",
         "o": {
           "kulit": "k2",
           "rambut": "r_pendek",
@@ -1697,9 +1727,9 @@
           "punggung": "p0"
         },
         "p": [
-          -0.27,
-          0.2,
-          -2.44,
+          0,
+          0.3,
+          13.5,
           3.14
         ],
         "lv": 99,
@@ -1712,7 +1742,7 @@
           "s": "main",
           "m": ""
         },
-        "aktif": 1793621423478,
+        "aktif": 1793631255079,
         "emo": null,
         "emoAt": 0
       }
@@ -1735,7 +1765,7 @@
       "absen": 7,
       "token": "47530bfb67db2d28df14cf52285176dc",
       "aktif": 1793620852814,
-      "blokir": false,
+      "blokir": true,
       "z": "kota",
       "o": {
         "kulit": "k2",
@@ -1774,7 +1804,7 @@
       "absen": 8,
       "token": "802603adb1ad0c88af745fee459eacb9",
       "aktif": 1793621472478,
-      "blokir": false,
+      "blokir": true,
       "z": "lobi2",
       "o": {
         "kulit": "k2",
@@ -1805,6 +1835,45 @@
       },
       "siap_id": 2,
       "siap_t": 1793621472478
+    },
+    {
+      "id": 4,
+      "kelas_kode": "9ERHDZ",
+      "nama": "Lala",
+      "absen": 9,
+      "token": "780ae051c26f311bdb1be986084a645a",
+      "aktif": 1793631190953,
+      "blokir": true,
+      "z": "lobi2",
+      "o": {
+        "kulit": "k2",
+        "rambut": "r_pendek",
+        "wrambut": "w1",
+        "topi": "t0",
+        "atasan": "a_sd",
+        "bawahan": "b2",
+        "wajah": "f0",
+        "leher": "l0",
+        "punggung": "p0"
+      },
+      "p": [
+        -1.79,
+        0.2,
+        -1.86,
+        3.14
+      ],
+      "sc": {
+        "lv": 1,
+        "bh": 0,
+        "g": 0
+      },
+      "st": {
+        "s": "main",
+        "m": "",
+        "q": null
+      },
+      "siap_id": 0,
+      "siap_t": 0
     }
   ],
   "sesi": [
@@ -1848,6 +1917,27 @@
       "soal_lama": 0,
       "skor": 0,
       "maks": 10,
+      "lari": 0
+    },
+    {
+      "id": 3,
+      "cid": "mvzdl5xrz0in18",
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 4,
+      "mapel_id": "numerasi",
+      "mapel_nama": "Numerasi",
+      "benar": 3,
+      "total": 7,
+      "nilai": 43,
+      "durasi": 117,
+      "t": 1793631001164,
+      "dunia": "kota",
+      "tantangan_id": 2,
+      "telat": 0,
+      "paket_kode": "RPETLM",
+      "soal_lama": 0,
+      "skor": 3,
+      "maks": 7,
       "lari": 0
     }
   ],
@@ -2033,6 +2123,104 @@
       "t": 1793620780071,
       "sesi_id": 0,
       "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 4,
+      "mapel_id": "numerasi",
+      "skey": "1thyzeb",
+      "q": "Pecahan 3/4 senilai dengan ...",
+      "p": 2,
+      "k": 0,
+      "ok": 0,
+      "d": 10,
+      "t": 1793631001163,
+      "sesi_id": 3,
+      "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 4,
+      "mapel_id": "numerasi",
+      "skey": "882cdb",
+      "q": "Rata-rata dari 6, 8, dan 10 adalah ...",
+      "p": 1,
+      "k": 1,
+      "ok": 1,
+      "d": 10.2,
+      "t": 1793631001163,
+      "sesi_id": 3,
+      "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 4,
+      "mapel_id": "numerasi",
+      "skey": "l1ib99",
+      "q": "Jika 2x + 5 = 17, nilai x adalah ...",
+      "p": 1,
+      "k": 1,
+      "ok": 1,
+      "d": 10.1,
+      "t": 1793631001163,
+      "sesi_id": 3,
+      "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 4,
+      "mapel_id": "numerasi",
+      "skey": "1f773i0",
+      "q": "Hasil dari 125 + 378 adalah ...",
+      "p": 3,
+      "k": 1,
+      "ok": 0,
+      "d": 10,
+      "t": 1793631001163,
+      "sesi_id": 3,
+      "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 4,
+      "mapel_id": "numerasi",
+      "skey": "17evbyd",
+      "q": "Ibu membeli 3 kotak kue. Setiap kotak berisi 12 kue. Berapa jumlah kue seluruhnya?",
+      "p": 1,
+      "k": 2,
+      "ok": 0,
+      "d": 12.7,
+      "t": 1793631001164,
+      "sesi_id": 3,
+      "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 4,
+      "mapel_id": "numerasi",
+      "skey": "1juilbh",
+      "q": "Diskon 20% dari harga Rp50.000 adalah ...",
+      "p": -1,
+      "k": 1,
+      "ok": 0,
+      "d": 11,
+      "t": 1793631001164,
+      "sesi_id": 3,
+      "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 4,
+      "mapel_id": "numerasi",
+      "skey": "1xtwrxm",
+      "q": "Keliling persegi dengan sisi 9 cm adalah ...",
+      "p": 2,
+      "k": 2,
+      "ok": 1,
+      "d": 10.9,
+      "t": 1793631001164,
+      "sesi_id": 3,
+      "j_json": ""
     }
   ],
   "materi": [
@@ -2087,7 +2275,8 @@
       "target": null,
       "go": 1793620491915,
       "akhir": 0,
-      "kode_main": "471792"
+      "kode_main": "471792",
+      "siap": 0
     },
     {
       "id": 2,
@@ -2117,17 +2306,18 @@
       "peta": "",
       "mapels": null,
       "target": null,
-      "go": 0,
+      "go": 1793630882204,
       "akhir": 0,
-      "kode_main": "076543"
+      "kode_main": "076543",
+      "siap": 0
     }
   ],
   "tmulai": [
     {
       "kelas_kode": "9ERHDZ",
-      "tantangan_id": 1,
-      "murid_id": 2,
-      "t_mulai": 1793620495260
+      "tantangan_id": 2,
+      "murid_id": 4,
+      "t_mulai": 1793630885382
     }
   ],
   "pendamping": [],
@@ -2137,6 +2327,7 @@
     "test-cid-1": 1793416188543,
     "mvz7h5vkv2jqx1": 1793620739123,
     "mvz7huqui7k7sn": 1793620771137,
-    "mvz7i4gxbjvm9y": 1793620784400
+    "mvz7i4gxbjvm9y": 1793620784400,
+    "mvzdl5xrz0in18": 1793631002859
   }
 }

@@ -3239,14 +3239,30 @@ function arenaTick(dt){var A=ARENA;if(!A||A.done)return;if(A.kind==="jb"){jbTick
  if(A.fly){var F=A.fly,u=Math.min(1,(performance.now()-F.t0)/F.dur);pos.x=F.x0+(F.x1-F.x0)*u;pos.z=F.z0+(F.z1-F.z0)*u;pos.y=F.y0+(F.y1-F.y0)*u+Math.sin(u*Math.PI)*(F.up?10:4);vy=0;heading=Math.PI;
   if(u>=1){A.fly=null;A.tier=F.k;if(typeof Q!=="undefined"&&Q)Q.tier=F.k;pos.y=F.y1;if(!A.isGuru)ujSave();if(F.up){try{SFX.win()}catch(e){}}}}
  for(var i=0;i<L.length;i++){if(now<L[i].a0)break;k=i;ph=now<L[i].a1?"tanya":"buka"}
- if(k>=0&&k===L.length-1&&now>=L[k].a2&&!A.fly){if(!A.endT){A.endT=now;lobiBig(A.isGuru?"🏁 LOMBA SELESAI!":(A.tier===AR_T-1?"👑 JUARA PUNCAK!":"🏁 SELESAI!"));try{SFX.win()}catch(e){}}else if(now-A.endT>2800){arenaFinish();return}}
+ var studentsLeft=false;
+ if(A.isGuru&&k>=0&&now>L[0].a0+8000){
+  var anyStudentInAr=specList().some(function(r){return /^ar\d/.test(r.z||"")});
+  if(!anyStudentInAr)studentsLeft=true;
+ }
+ if(k>=0&&(k===L.length-1&&now>=L[k].a2||studentsLeft)&&!A.fly){
+  if(!A.endT){A.endT=now;lobiBig(A.isGuru?"🏁 LOMBA SELESAI!":(A.tier===AR_T-1?"👑 JUARA PUNCAK!":"🏁 SELESAI!"));try{SFX.win()}catch(e){}}
+  else if(now-A.endT>2200){arenaFinish();return}
+ }
  if(k!==A.k){A.k=k;if(k>=0)arSetQ(k)}
  if(k>=0&&ph==="tanya")A.seen[k]=1;
  if(k>=0&&ph==="buka"&&A.lk!==k){A.lk=k;arLock(k)}
  A.ph=ph;
  A.parts.tiers.forEach(function(T){T.tiles.forEach(function(tl){var tg=tl.drop?-40:0;if(Math.abs(tl.y-tg)>0.01){tl.y+=(tg-tl.y)*Math.min(1,dt*(tl.drop?1.6:5));tl.m.position.y=tl.y-0.5;if(tl.lab)tl.lab.position.y=tl.y+0.04;if(tl.drop&&tl.y<-35&&!tl.on)tl.m.visible=false}})});
  if(A.isGuru)arGuruHud(k,ph,now);else arHud(k,ph,now);if(Q&&Q.batas&&now>Q.batas+4000)arenaFinish()}
-function arenaFinish(){var A=ARENA;if(!A||A.done)return;A.done=true;if(A.isGuru){arenaLeave(true);if(GURU)syncGuruRoom();return}if(Q&&Q.arena&&!Q.finished&&Q.tan&&Q.tan.lat){latihanSelesai()}else if(Q&&Q.arena&&!Q.finished){Q.i=A.kind==="jb"?Math.min(A.c,A.N-1):A.kind==="lk"?Math.max(0,Math.min(A.k,A.N-1)):Math.max(0,A.k);finishUjian()}arenaLeave(true)}
+function arenaFinish(){var A=ARENA;if(!A||A.done)return;A.done=true;
+ if(A.isGuru){
+  var tid=A.id;if(tid)GURU_DONE_TAN[tid]=true;
+  arenaLeave(true);
+  if(SPEC)specStart();else specUpdUI();
+  toast("🏁 Permainan selesai! Anda kembali ke Kota Ilmu bersama murid.",3500);
+  return;
+ }
+ if(Q&&Q.arena&&!Q.finished&&Q.tan&&Q.tan.lat){latihanSelesai()}else if(Q&&Q.arena&&!Q.finished){Q.i=A.kind==="jb"?Math.min(A.c,A.N-1):A.kind==="lk"?Math.max(0,Math.min(A.k,A.N-1)):Math.max(0,A.k);finishUjian()}arenaLeave(true)}
 function arenaLeave(quiet){var A=ARENA;if(!A)return;scene.remove(A.parts.g);A.parts.g.traverse(function(x){if(x.material&&x.material.map)x.material.map.dispose()});var pv=A.prev;if(A.cd)camDist=camWant=Math.min(A.cd,46);if(A.kind==="lk"){(A.hid||[]).forEach(function(c){c.visible=true});try{setEnv(A.env0||"kota")}catch(e){}document.body.classList.remove("inrun");if(avatar)avatar.scale.y=1;if(typeof avTag!=="undefined"&&avTag)avTag.visible=true;if(A.fov){camera.fov=A.fov;camera.updateProjectionMatrix()}var en=ENVS[CUR.env||"kota"];FOG0.n=en.near*(lowGfx?.75:1);FOG0.f=en.far*(lowGfx?.75:1);scene.fog.near=FOG0.n;scene.fog.far=FOG0.f}ARENA=null;
  var e=$("arHud");if(e)e.style.display="none";lobiBig(null);if(pv){pos.x=pv.x;pos.z=pv.z;pos.y=groundAt(pv.x,pv.z);heading=pv.h||0;vy=0;if(camPos)camPos.set(pos.x,pos.y+8,pos.z+12)}lobiHud();rtHello("z");if(!quiet)toast("Kamu keluar dari arena.",2000)}
 
@@ -5225,7 +5241,7 @@ $("sMp").onclick=function(){P.settings.mp=P.settings.mp===false;save();RT.stop=f
 /* =================================================================
    GURU: pantau langsung (dashboard) & ikut masuk game + kamera pantau 3D
    ================================================================= */
-var GURU=null,LV={adv:{},ws:null,on:false,roster:[],ev:[],err:"",kode:"",tm:null,want:false};
+var GURU=null,LV={adv:{},ws:null,on:false,roster:[],ev:[],err:"",kode:"",tm:null,want:false},GURU_DONE_TAN={};
 var ST_LABEL={petualangan:"🗺️ Sesi petualangan",main:"🎮 Menjelajah",kuis:"✏️ Kuis",tantangan:"⚡ Tantangan",materi:"📺 Membaca materi",warga:"💬 Menjawab pertanyaan warga",menu:"⏸️ Di menu",lobi:"⏳ Di ruang tunggu"};
 function stText(st){if(!st)return"🎮 Menjelajah";return(ST_LABEL[st.s]||"🎮 Menjelajah")+(st.m?" "+st.m:"")}
 function rtQ(){if(Q.type==="ujian"){var j=0,b=0;Q.list.forEach(function(it,i){var p=Q.pick[i];if(p==null)return;j++;if(p&&typeof p==="object"?p.ok:p===it.s.jawab)b++});return{i:Q.i+1,n:Q.list.length,j:j,b:b,s:j-b,h:0}}
@@ -5247,17 +5263,27 @@ function specList(){var by={},L=[];RT.roster.forEach(function(r){if(!r.g){by[r.i
 function specWaitTan(tid){var act=specActiveTan(tid);return act&&!act.go?act:null}
 function specActiveTan(tid){
  var nw=(DB_&&DB_.now)||Date.now(),ts=(DB_&&DB_.tantangan)||[];
- if(tid){var t0=ts.filter(function(t){return t.id===tid})[0];if(t0)return t0}
+ if(tid){var t0=ts.filter(function(t){return t.id===tid})[0];if(t0&&!GURU_DONE_TAN[t0.id])return t0}
  var L=specList();
  for(var i=0;i<L.length;i++){
   var z=L[i].z||"",mAr=/^ar(\d+)$/.exec(z),mLb=/^lobi(\d+)$/.exec(z),mTg=/^tg(\d+)/.exec(z);
   var mid=mAr?+mAr[1]:mLb?+mLb[1]:mTg?+mTg[1]:0;
-  if(mid){var tM=ts.filter(function(t){return t.id===mid})[0];if(tM)return tM}
+  if(mid&&!GURU_DONE_TAN[mid]){var tM=ts.filter(function(t){return t.id===mid})[0];if(tM)return tM}
  }
- var ongoing=ts.filter(function(t){return t.aktif&&t.go&&!t.akhir&&nw<=t.selesai+60000});
- if(ongoing.length)return ongoing[0];
- var wait=ts.filter(function(t){return t.aktif&&t.serentak&&!t.go&&!t.akhir&&nw<=t.selesai});
+ var wait=ts.filter(function(t){return t.aktif&&t.serentak&&!t.go&&!t.akhir&&nw<=t.selesai&&!GURU_DONE_TAN[t.id]});
  if(wait.length)return wait[0];
+ var ongoing=ts.filter(function(t){
+  if(!t.aktif||!t.go||t.akhir||nw>t.selesai+60000||GURU_DONE_TAN[t.id])return false;
+  var age=nw-(t.go||0);
+  if(t.jenis==="arena"||t.jenis==="jembatan"){
+   var hasStudentsInAr=L.some(function(r){return new RegExp("^ar"+t.id+"$").test(r.z||"")});
+   if(age>18000&&!hasStudentsInAr)return false;
+   var qEst=(+(t.jumlah)||10)*24000+25000;
+   if(age>qEst)return false;
+  }
+  return true;
+ });
+ if(ongoing.length)return ongoing[0];
  return null;
 }
 function startGuruArena(t){
@@ -5273,6 +5299,13 @@ function startGuruArena(t){
  if(!list.length)list=[{s:{q:"Tantangan Jatuh Bangun",opsi:["A","B","C","D"],jawab:0},mp:{nama:t.judul}}];
  var at=(t.go||(t.mulai)||srv())+AR_LEAD;
  list.forEach(function(it){it.a0=at;it.a1=at+arTime(it.s);it.a2=it.a1+AR_REV;at=it.a2});
+ var lastA2=list[list.length-1].a2;
+ if(srv()>=lastA2){
+  GURU_DONE_TAN[t.id]=true;
+  toast("🏁 Tantangan ini sudah selesai. Murid berada di Kota Ilmu.",3500);
+  if(SPEC)specStart();else specUpdUI();
+  return;
+ }
  var Z=CUR.spawn||[0,0,0],O={x:Z[0],y:AR_Y,z:Z[2]+40};
  ARENA={id:t.id,kind:"ar",t:t,O:O,list:list,k:-1,lk:-1,ph:"",seen:{},parts:arBuild(O),prev:{x:pos.x,y:pos.y,z:pos.z,h:heading},done:false,hk:"",cd:camWant,tier:0,fly:null,down:false,endT:0,isGuru:true};
  if(SPEC){pos.set(O.x,O.y+12,O.z+32);camDist=camWant=48;pitch=0.65}
@@ -5331,7 +5364,10 @@ function syncGuruRoom(preferredTid){
    return;
   }
  }
- if(ARENA&&ARENA.isGuru)arenaLeave(true);
+ if(ARENA&&ARENA.isGuru){
+  arenaLeave(true);
+  if(SPEC)specStart();else specUpdUI();
+ }
 }
 function specSync(){if(!GURU)return;
  syncGuruRoom();
@@ -5357,11 +5393,39 @@ function specUpdUI(){var b=$("specBar");if(!b)return;if(!GURU||mode==="landing")
 $("specBar").addEventListener("click",function(e){var b=e.target.closest("[data-spact]");if(!b)return;var a=b.dataset.spact;
  if(a==="free")specStop(false);
  else if(a==="auto")specStart();
- else if(a==="arena"){var act=specActiveTan();if(act){if(act.jenis==="arena")startGuruArena(act);else if(act.jenis==="jembatan")startGuruJembatan(act);specSync()}}
+ else if(a==="arena"){
+  var act=specActiveTan();
+  if(!act){
+   var nw=(DB_&&DB_.now)||Date.now(),ts=(DB_&&DB_.tantangan)||[];
+   var og=ts.filter(function(t){return t.aktif&&t.go&&!t.akhir&&nw<=t.selesai+60000});
+   if(og.length)act=og[0];
+  }
+  if(act){delete GURU_DONE_TAN[act.id];if(act.jenis==="arena")startGuruArena(act);else if(act.jenis==="jembatan")startGuruJembatan(act);specSync()}
+ }
  else if(a==="lobi"){var wt=specActiveTan();if(wt&&!wt.go){lobiEnter(wt);specSync();if(SPEC)specStart();else specUpdUI();RT.httpLast=0}}
- else if(a==="world"){if(ARENA&&ARENA.isGuru)arenaLeave(true);if(LOBI)lobiLeave(true);specSync();if(SPEC)specStart();else specUpdUI();RT.httpLast=0;toast("🌍 Berpindah ke Ruang Permainan 3D",2500)}
- else if(a==="tgo"&&LOBI&&LOBI.t){var t=LOBI.t;ask("Mulai \""+t.judul+"\" sekarang untuk semua murid di lobi?",function(){api("/tantangan/go",{lic:licBody(),kode:GURU.kode,pin:GURU.pin,id:t.id,aksi:"mulai"}).then(function(){t.go=Date.now();lvSendGo(t.id,"mulai");syncGuruRoom(t.id);specSync();if(SPEC)specStart();else specUpdUI();toast("▶ Tantangan dimulai! Guru dan semua murid masuk ke arena.",4000)},function(er){info(er.message)})},{ic:"▶️",t:"Mulai \""+t.judul+"\"?",ok:"▶ Mulai"})}
- else if(a==="dash")backToDash()});
+ else if(a==="world"){
+  if(ARENA){if(ARENA.id)GURU_DONE_TAN[ARENA.id]=true;arenaLeave(true)}
+  if(LOBI)lobiLeave(true);
+  if(SPEC)specStart();else specUpdUI();
+  RT.httpLast=0;
+  toast("🌍 Berpindah ke Kota Ilmu bersama murid",2500)
+ }
+ else if(a==="tgo"&&LOBI&&LOBI.t){
+  var t=LOBI.t;
+  ask("Mulai \""+t.judul+"\" sekarang untuk semua murid di lobi?",function(){
+   api("/tantangan/go",{lic:licBody(),kode:GURU.kode,pin:GURU.pin,id:t.id,aksi:"mulai"}).then(function(){
+    t.go=Date.now();
+    delete GURU_DONE_TAN[t.id];
+    lvSendGo(t.id,"mulai");
+    syncGuruRoom(t.id);
+    specSync();
+    if(SPEC)specStart();else specUpdUI();
+    toast("▶ Tantangan dimulai! Guru dan semua murid masuk ke arena.",4000)
+   },function(er){info(er.message)})
+  },{ic:"▶️",t:"Mulai \""+t.judul+"\"?",ok:"▶ Mulai"})
+ }
+ else if(a==="dash")backToDash()
+});
 function updGuruUI(){var on=!!GURU;$("hGuru").style.display=on?"block":"none";$("bGuruT").style.display=on?"":"none";if(on)$("hGuru").textContent="👩‍🏫 Mode Guru • "+(RT.on?"live":API_URL?"aktif":"");
  Array.prototype.forEach.call(document.querySelectorAll(".gonly"),function(x){x.style.display=on?"":"none"});if(!on)$("guruPanel").classList.remove("show");$("tracker").style.display=on?"none":"";railUpd();specUpdUI();try{hud()}catch(e){}}
 function startGuruPlay(overview,lobiTid){if(!DB_)return;GURU={kode:dState.kode,pin:dState.pin,nama:DB_.kelas.guru||(LIC&&LIC.nama)||"Guru",kelas:DB_.kelas.nama};lvClose();clearInterval(dTimer);$("ovDash").classList.remove("show");$("ovGuru").classList.remove("show");
