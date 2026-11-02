@@ -2785,6 +2785,7 @@ var LS_CL="zd2_kelas",LS_OUT="zd2_outbox",LS_GK="zd2_guru_kelas";
 var CL=lsGet(LS_CL,null),outbox=lsGet(LS_OUT,[]);
 function api(path,body){
  if(!API_URL)return Promise.reject(new Error("Server kelas belum dihubungkan"));if(typeof fetch!=="function")return Promise.reject(new Error("Tidak bisa terhubung ke server. Periksa internet."));
+ if(body&&typeof body==="object"&&body.kode&&!body._kmeta){try{var gkM=(lsGet(LS_GK,[])||[]).filter(function(x){return x&&x.kode===String(body.kode).toUpperCase()})[0];if(gkM)body._kmeta={kode:gkM.kode,nama:gkM.nama||("Kelas "+gkM.kode),pin:gkM.pin||body.pin||"123456",pk:gkM.pk||"",guru:(typeof draft!=="undefined"&&draft&&draft.guru)||(typeof LIC!=="undefined"&&LIC&&LIC.nama)||"Guru EduVerse",paket:typeof exportPack==="function"?exportPack():data}}catch(e){}}
  var ctrl=window.AbortController?new AbortController():null,tm=setTimeout(function(){if(ctrl)ctrl.abort()},15000);
  var opt=body?{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}:{};if(ctrl)opt.signal=ctrl.signal;
  return fetch(API_URL+path,opt).then(function(r){clearTimeout(tm);return r.json().catch(function(){return{}}).then(function(j){if(!r.ok){if(r.status===404&&j.error==="Alamat tidak ditemukan")j.error="Fitur ini butuh server (API) versi terbaru. Pasang ulang file eduverse-api.js terbaru di Cloudflare (Edit code lalu Deploy), lalu coba lagi.";var e=new Error(j.error||("Server menjawab "+r.status));e.status=r.status;e.kode=j.kode||"";if(j.kode==="blokir"&&CL&&!GURU&&path!=="/murid/masuk")setTimeout(function(){kickedOut()},0);if(j.kode==="pdp"&&PDP_ON)setTimeout(function(){pdpOff(j.error)},0);throw e}return j})},
@@ -2984,7 +2985,7 @@ function akRender(r){var g=r.guru,S=r.setelan||{},st=AK_ST[g.status]||[g.status,
  $("akPwGo").onclick=function(){var b=$("akPwB").value;if(b.length<8){am("Kata sandi baru minimal 8 karakter.","#ff8a80");return}api("/akun/sandi",{lic:licBody(),lama:$("akPwL")?$("akPwL").value:"",baru:b}).then(function(){am("✔ Kata sandi tersimpan.","#7dffa0");$("akPwB").value="";if($("akPwL"))$("akPwL").value=""},function(e){am("❌ "+e.message,"#ff8a80")})}}
 $("akClose").onclick=function(){$("ovAkun").classList.remove("show");if(mode==="menu"&&!$("ovGuru").classList.contains("show"))setMode("play")};
 function needPin(c,gk,fn){if(c.pin){fn();return}zDlg({ic:"🔒",t:"PIN guru",m:"Masukkan PIN guru untuk kelas "+c.nama+".",input:true,pw:true,num:true,ph:"PIN 6 angka",ok:"Lanjut",cb:function(v){if(!v||!String(v).trim())return;c.pin=String(v).trim();lsSet(LS_GK,gk);fn()}})}
-function syncGK(){if(gkSynced||!LIC||!API_URL)return;gkSynced=true;api("/guru/kelas",{lic:licBody()}).then(function(r){var gk=lsGet(LS_GK,[]),ch=false;LIC.maks=r.maks_kelas;lsSet(LS_LIC,LIC);
+function syncGK(){if(gkSynced||!LIC||!API_URL)return;gkSynced=true;api("/guru/kelas",{lic:licBody(),kelas_lokal:lsGet(LS_GK,[]),guru:(draft&&draft.guru)||(LIC&&LIC.nama)||"Guru EduVerse",paket:typeof exportPack==="function"?exportPack():data}).then(function(r){var gk=lsGet(LS_GK,[]),ch=false;LIC.maks=r.maks_kelas;lsSet(LS_LIC,LIC);
  r.kelas.forEach(function(k){if(!gk.some(function(c){return c.kode===k.kode})){gk.push({kode:k.kode,nama:k.nama,pin:""});ch=true}});if(ch){lsSet(LS_GK,gk);if(gTab==="kelas"&&$("ovGuru").classList.contains("show"))renderGuru()}},function(e){gkSynced=false;if(e.status===403)licFail(e.message,e.kode)})}
 $("licClose").onclick=function(){$("ovLic").classList.remove("show");if(mode==="menu")setMode("play")};
 $("gLogout").onclick=function(){licOut()};
@@ -5429,7 +5430,7 @@ var PWA={evt:null};
 function isStandalone(){try{return(window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches)||(window.matchMedia&&window.matchMedia("(display-mode: fullscreen)").matches)||(window.matchMedia&&window.matchMedia("(display-mode: window-controls-overlay)").matches)||navigator.standalone===true}catch(e){return false}}
 function isIOS(){return/iphone|ipad|ipod/i.test(navigator.userAgent||"")||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1)}
 function updInstall(){var b=$("lpInstall");if(!b)return;b.style.display=!isStandalone()&&(PWA.evt||isIOS())?"":"none"}
-window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();PWA.evt=e;updInstall()});
+window.addEventListener("beforeinstallprompt",function(e){PWA.evt=e;updInstall()});
 window.addEventListener("appinstalled",function(){PWA.evt=null;updInstall();toast("✅ EduVerse sudah terpasang. Buka dari ikon di layar HP, bisa dipakai walau tanpa sinyal.",5000)});
 $("lpInstall").onclick=function(){if(PWA.evt){var ev=PWA.evt;ev.prompt();(ev.userChoice||Promise.resolve({})).then(function(c){if(c&&c.outcome==="accepted")PWA.evt=null;updInstall()});return}
  zDlg({ic:"📲",t:"Pasang di iPhone/iPad",m:"1. Buka halaman ini di Safari.\n2. Tekan tombol Bagikan (kotak dengan panah ke atas).\n3. Pilih \"Tambah ke Layar Utama\".\n4. Tekan \"Tambah\".\n\nSetelah itu EduVerse bisa dibuka dari ikon di layar, walau tanpa sinyal.",ok:"Mengerti",alert:true})};

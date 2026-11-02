@@ -247,10 +247,30 @@ function formatGuruPublic(g) {
 }
 
 function checkKelasAccess(lic, kode, pin, allowPdp) {
-  const k = DB.kelas[String(kode || "").toUpperCase()];
-  if (!k) return { error: "Kelas tidak ditemukan.", status: 404 };
+  const kd = String(kode || "").trim().toUpperCase();
+  let k = DB.kelas[kd];
   const auth = resolveGuru(lic);
   if (auth.error) return auth;
+  if (!k && kd && !auth.pdp) {
+    // Auto-restore class on serverless cold start if missing from /tmp
+    const g = auth.guru;
+    const now = Date.now();
+    k = DB.kelas[kd] = {
+      kode: kd,
+      guru_id: g ? g.id : 1,
+      nama: "Kelas " + kd,
+      guru: (g && g.nama) || "Guru EduVerse",
+      pin: String(pin || "123456"),
+      paket: (g && g.soal_paket) || { judul: "Paket Kelas", mapel: [] },
+      paket_kode: (g && g.soal_pk) || "",
+      diubah: now,
+      kunci: false,
+      rekap: null,
+      dibuat: now
+    };
+    saveDB();
+  }
+  if (!k) return { error: "Kelas tidak ditemukan.", status: 404 };
   if (auth.pdp) {
     if (!allowPdp || auth.pdp.kelas_kode !== k.kode) {
       return { error: "Akses ini hanya untuk guru utama kelas.", status: 403 };
@@ -311,6 +331,48 @@ function readJsonBody(req) {
 
 async function handleApi(req, res, pathname, query) {
   const body = req.method === "POST" ? await readJsonBody(req) : {};
+
+  // Auto-sync teacher class metadata on serverless cold starts
+  if (body && body._kmeta && body._kmeta.kode) {
+    const km = body._kmeta;
+    const kd = String(km.kode || "").trim().toUpperCase();
+    if (kd && !DB.kelas[kd]) {
+      const auth = resolveGuru(body.lic);
+      const g = auth.guru;
+      const now = Date.now();
+      const pkKode = String(km.pk || "").trim().toUpperCase();
+      if (pkKode && km.paket && !DB.paket[pkKode]) {
+        DB.paket[pkKode] = {
+          kode: pkKode,
+          guru_id: g ? g.id : 1,
+          guru: km.guru || (g && g.nama) || "Guru EduVerse",
+          sekolah: (g && g.sekolah) || "",
+          judul: km.paket.judul || "Paket Soal",
+          paket: km.paket,
+          diubah: now,
+          dibuka: 0,
+          publik: true,
+          bank: false,
+          bank_t: 0,
+          bank_pakai: 0
+        };
+      }
+      DB.kelas[kd] = {
+        kode: kd,
+        guru_id: g ? g.id : 1,
+        nama: String(km.nama || ("Kelas " + kd)).slice(0, 40),
+        guru: String(km.guru || (g && g.nama) || "Guru EduVerse"),
+        pin: String(km.pin || body.pin || "123456"),
+        paket: km.paket || { judul: "Paket Kelas", mapel: [] },
+        paket_kode: pkKode,
+        diubah: now,
+        kunci: false,
+        rekap: null,
+        dibuat: now
+      };
+      saveDB();
+    }
+  }
 
   // 1. Setelan umum
   if (pathname === "/setelan") {
@@ -511,6 +573,31 @@ async function handleApi(req, res, pathname, query) {
     const auth = resolveGuru(body.lic);
     if (auth.error) return sendJson(res, auth.status || 403, { error: auth.error });
     const g = auth.guru;
+    if (Array.isArray(body.kelas_lokal)) {
+      const now = Date.now();
+      let changed = false;
+      body.kelas_lokal.forEach(c => {
+        if (!c || !c.kode) return;
+        const kd = String(c.kode).trim().toUpperCase();
+        if (kd && !DB.kelas[kd]) {
+          DB.kelas[kd] = {
+            kode: kd,
+            guru_id: g.id,
+            nama: String(c.nama || ("Kelas " + kd)).slice(0, 40),
+            guru: String(body.guru || g.nama || "Guru EduVerse"),
+            pin: String(c.pin || "123456"),
+            paket: body.paket || g.soal_paket || { judul: "Paket Kelas", mapel: [] },
+            paket_kode: String(c.pk || ""),
+            diubah: now,
+            kunci: false,
+            rekap: null,
+            dibuat: now
+          };
+          changed = true;
+        }
+      });
+      if (changed) saveDB();
+    }
     const list = Object.values(DB.kelas)
       .filter(k => k.guru_id === g.id)
       .map(k => ({ kode: k.kode, nama: k.nama }));
