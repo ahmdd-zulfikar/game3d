@@ -14,5 +14,5 @@ echo Salin dan kirim link tersebut ke grup WA / HP murid.
 echo JANGAN TUTUP jendela ini selama murid sedang bermain.
 echo ============================================================
 echo.
-npx cloudflared tunnel --url http://localhost:3000
+npx cloudflared tunnel --url http://127.0.0.1:3000
 pause

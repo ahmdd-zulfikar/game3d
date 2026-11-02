@@ -10,7 +10,7 @@ echo 1. Membuka jendela Server Laptop...
 start "EduVerse - Server Game" cmd /k "cd /d ""%~dp0"" && node server.js"
 timeout /t 2 /nobreak >nul
 echo 2. Membuka jendela Cloudflare Tunnel...
-start "EduVerse - Jalur Online" cmd /k "cd /d ""%~dp0"" && npx cloudflared tunnel --url http://localhost:3000"
+start "EduVerse - Jalur Online" cmd /k "cd /d ""%~dp0"" && npx cloudflared tunnel --url http://127.0.0.1:3000"
 echo.
 echo Selesai! Kedua jendela sudah dibuka di layar Anda.
 echo Salin link 'https://....trycloudflare.com' di jendela Tunnel untuk murid.

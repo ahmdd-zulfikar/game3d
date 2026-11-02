@@ -1,9 +1,9 @@
 {
   "seq": {
     "guru": 3,
-    "murid": 2,
-    "sesi": 2,
-    "tantangan": 1,
+    "murid": 4,
+    "sesi": 3,
+    "tantangan": 3,
     "pendamping": 1,
     "bayar": 1,
     "kode": 1
@@ -70,16 +70,498 @@
       "maks_perangkat": 25,
       "aktif": true,
       "dibuat": 1793416396701,
-      "terakhir_masuk": 1793427817243,
+      "terakhir_masuk": 1793621423524,
       "sess": [
         "free-c29f5c257bd55f72ce1b2ae001ee928f"
       ],
       "dev": [
         "c29f5c257bd55f72ce1b2ae001ee928f"
       ],
-      "soal_paket": null,
-      "soal_pk": "",
-      "soal_diubah": 0,
+      "soal_paket": {
+        "judul": "Paket Contoh EduVerse",
+        "guru": "Tim EduVerse",
+        "jenjang": "Umum (SD sampai SMA/SMK)",
+        "mapel": [
+          {
+            "nama": "Numerasi",
+            "warna": "#ef4444",
+            "waktu": 30,
+            "jumlah": 5,
+            "materi": [
+              {
+                "judul": "Ringkasan: Pecahan, Persen, dan Rata-rata",
+                "jenis": "teks",
+                "isi": "Pecahan senilai adalah pecahan yang nilainya sama walaupun angkanya berbeda. Caranya: kalikan atau bagi pembilang dan penyebut dengan bilangan yang sama.\nContoh: 3/4 = 6/8 = 9/12.\n\nPersen artinya per seratus. 20% sama dengan 20/100. Untuk mencari 20% dari 50.000, hitung 20/100 × 50.000 = 10.000.\n\nRata-rata = jumlah semua data dibagi banyak data. Contoh: rata-rata 6, 8, dan 10 adalah (6 + 8 + 10) : 3 = 8."
+              }
+            ],
+            "soal": [
+              {
+                "q": "Hasil dari 125 + 378 adalah ...",
+                "opsi": [
+                  "493",
+                  "503",
+                  "513",
+                  "403"
+                ],
+                "jawab": 1,
+                "bahas": "125 + 378 = 503."
+              },
+              {
+                "q": "Ibu membeli 3 kotak kue. Setiap kotak berisi 12 kue. Berapa jumlah kue seluruhnya?",
+                "opsi": [
+                  "15",
+                  "24",
+                  "36",
+                  "48"
+                ],
+                "jawab": 2,
+                "bahas": "3 × 12 = 36 kue."
+              },
+              {
+                "q": "Keliling persegi dengan sisi 9 cm adalah ...",
+                "opsi": [
+                  "18 cm",
+                  "27 cm",
+                  "36 cm",
+                  "81 cm"
+                ],
+                "jawab": 2,
+                "bahas": "Keliling persegi = 4 × sisi = 4 × 9 = 36 cm."
+              },
+              {
+                "q": "Pecahan 3/4 senilai dengan ...",
+                "opsi": [
+                  "6/8",
+                  "3/8",
+                  "4/3",
+                  "9/16"
+                ],
+                "jawab": 0,
+                "bahas": "3/4 dikali 2/2 menjadi 6/8."
+              },
+              {
+                "q": "Jika 2x + 5 = 17, nilai x adalah ...",
+                "opsi": [
+                  "5",
+                  "6",
+                  "7",
+                  "11"
+                ],
+                "jawab": 1,
+                "bahas": "2x = 17 − 5 = 12, maka x = 6."
+              },
+              {
+                "q": "Diskon 20% dari harga Rp50.000 adalah ...",
+                "opsi": [
+                  "Rp5.000",
+                  "Rp10.000",
+                  "Rp20.000",
+                  "Rp40.000"
+                ],
+                "jawab": 1,
+                "bahas": "20% × 50.000 = 10.000."
+              },
+              {
+                "q": "Rata-rata dari 6, 8, dan 10 adalah ...",
+                "opsi": [
+                  "7",
+                  "8",
+                  "9",
+                  "24"
+                ],
+                "jawab": 1,
+                "bahas": "(6 + 8 + 10) : 3 = 24 : 3 = 8."
+              }
+            ]
+          },
+          {
+            "nama": "Literasi",
+            "warna": "#3b82f6",
+            "waktu": 30,
+            "jumlah": 5,
+            "materi": [
+              {
+                "judul": "Ringkasan: Fakta, Opini, dan Ide Pokok",
+                "jenis": "teks",
+                "isi": "Fakta adalah informasi yang benar-benar terjadi dan bisa dibuktikan. Contoh: Gunung Inerie terletak di Pulau Flores.\n\nOpini adalah pendapat seseorang yang belum tentu sama dengan pendapat orang lain. Opini sering ditandai kata menurutku, sebaiknya, mungkin, atau paling.\n\nIde pokok paragraf biasanya terdapat pada kalimat utama, yaitu di awal atau di akhir paragraf."
+              }
+            ],
+            "soal": [
+              {
+                "q": "Sinonim kata 'gembira' adalah ...",
+                "opsi": [
+                  "sedih",
+                  "senang",
+                  "marah",
+                  "takut"
+                ],
+                "jawab": 1,
+                "bahas": "Gembira bermakna sama dengan senang."
+              },
+              {
+                "q": "Kalimat berikut yang merupakan opini adalah ...",
+                "opsi": [
+                  "Gunung Inerie terletak di Flores.",
+                  "Menurutku, pantai itu paling indah.",
+                  "Air mendidih pada suhu 100°C.",
+                  "Satu minggu ada tujuh hari."
+                ],
+                "jawab": 1,
+                "bahas": "Kata 'menurutku' menandakan pendapat pribadi (opini)."
+              },
+              {
+                "q": "Ide pokok paragraf biasanya terdapat pada ...",
+                "opsi": [
+                  "kalimat utama",
+                  "kalimat penjelas",
+                  "judul",
+                  "tanda baca"
+                ],
+                "jawab": 0,
+                "bahas": "Ide pokok dinyatakan dalam kalimat utama."
+              },
+              {
+                "q": "Antonim kata 'rajin' adalah ...",
+                "opsi": [
+                  "pintar",
+                  "malas",
+                  "tekun",
+                  "giat"
+                ],
+                "jawab": 1,
+                "bahas": "Lawan kata rajin adalah malas."
+              },
+              {
+                "q": "Teks yang bertujuan meyakinkan atau mengajak pembaca disebut teks ...",
+                "opsi": [
+                  "narasi",
+                  "deskripsi",
+                  "persuasi",
+                  "prosedur"
+                ],
+                "jawab": 2,
+                "bahas": "Teks persuasi berisi ajakan atau bujukan."
+              },
+              {
+                "q": "Penulisan huruf kapital yang benar adalah ...",
+                "opsi": [
+                  "saya tinggal di kupang.",
+                  "Saya tinggal di Kupang.",
+                  "saya Tinggal di kupang.",
+                  "Saya Tinggal Di Kupang."
+                ],
+                "jawab": 1,
+                "bahas": "Huruf kapital dipakai di awal kalimat dan nama tempat."
+              }
+            ]
+          },
+          {
+            "nama": "IPA",
+            "warna": "#22c55e",
+            "waktu": 30,
+            "jumlah": 5,
+            "materi": [
+              {
+                "judul": "Ringkasan: Fotosintesis dan Wujud Zat",
+                "jenis": "teks",
+                "isi": "Fotosintesis adalah proses tumbuhan hijau membuat makanan sendiri. Bahannya air, karbon dioksida, dan cahaya matahari. Hasilnya gula (makanan) dan oksigen.\n\nPerubahan wujud zat:\n• Mencair: padat menjadi cair\n• Membeku: cair menjadi padat\n• Menguap: cair menjadi gas\n• Mengembun: gas menjadi cair"
+              }
+            ],
+            "soal": [
+              {
+                "q": "Proses tumbuhan membuat makanan sendiri disebut ...",
+                "opsi": [
+                  "respirasi",
+                  "fotosintesis",
+                  "evaporasi",
+                  "transpirasi"
+                ],
+                "jawab": 1,
+                "bahas": "Fotosintesis memerlukan cahaya matahari, air, dan karbon dioksida."
+              },
+              {
+                "q": "Planet yang paling dekat dengan Matahari adalah ...",
+                "opsi": [
+                  "Venus",
+                  "Bumi",
+                  "Merkurius",
+                  "Mars"
+                ],
+                "jawab": 2,
+                "bahas": "Merkurius adalah planet terdekat dari Matahari."
+              },
+              {
+                "q": "Perubahan wujud dari cair menjadi gas disebut ...",
+                "opsi": [
+                  "membeku",
+                  "mencair",
+                  "menguap",
+                  "mengembun"
+                ],
+                "jawab": 2,
+                "bahas": "Contohnya air yang dipanaskan berubah menjadi uap."
+              },
+              {
+                "q": "Organ tubuh yang berfungsi memompa darah adalah ...",
+                "opsi": [
+                  "paru-paru",
+                  "jantung",
+                  "hati",
+                  "ginjal"
+                ],
+                "jawab": 1,
+                "bahas": "Jantung memompa darah ke seluruh tubuh."
+              },
+              {
+                "q": "Satuan gaya dalam Sistem Internasional adalah ...",
+                "opsi": [
+                  "Joule",
+                  "Newton",
+                  "Watt",
+                  "Pascal"
+                ],
+                "jawab": 1,
+                "bahas": "Satuan gaya adalah Newton (N)."
+              },
+              {
+                "q": "Hewan yang hanya memakan tumbuhan disebut ...",
+                "opsi": [
+                  "karnivora",
+                  "herbivora",
+                  "omnivora",
+                  "pengurai"
+                ],
+                "jawab": 1,
+                "bahas": "Herbivora adalah pemakan tumbuhan, misalnya sapi dan kambing."
+              }
+            ]
+          },
+          {
+            "nama": "IPS & PPKn",
+            "warna": "#f97316",
+            "waktu": 30,
+            "jumlah": 5,
+            "soal": [
+              {
+                "q": "Ibu kota Provinsi Nusa Tenggara Timur adalah ...",
+                "opsi": [
+                  "Kupang",
+                  "Ende",
+                  "Maumere",
+                  "Labuan Bajo"
+                ],
+                "jawab": 0,
+                "bahas": "Ibu kota NTT adalah Kupang."
+              },
+              {
+                "q": "Bunyi sila pertama Pancasila adalah ...",
+                "opsi": [
+                  "Persatuan Indonesia",
+                  "Ketuhanan Yang Maha Esa",
+                  "Kemanusiaan yang adil dan beradab",
+                  "Keadilan sosial bagi seluruh rakyat Indonesia"
+                ],
+                "jawab": 1,
+                "bahas": "Sila pertama: Ketuhanan Yang Maha Esa."
+              },
+              {
+                "q": "Proklamasi kemerdekaan Indonesia dibacakan pada tahun ...",
+                "opsi": [
+                  "1942",
+                  "1945",
+                  "1950",
+                  "1959"
+                ],
+                "jawab": 1,
+                "bahas": "Proklamasi dibacakan pada 17 Agustus 1945."
+              },
+              {
+                "q": "Semboyan negara Indonesia adalah ...",
+                "opsi": [
+                  "Tut Wuri Handayani",
+                  "Bhinneka Tunggal Ika",
+                  "Garuda Pancasila",
+                  "Merdeka atau Mati"
+                ],
+                "jawab": 1,
+                "bahas": "Bhinneka Tunggal Ika berarti berbeda-beda tetapi tetap satu."
+              },
+              {
+                "q": "Kegiatan menghasilkan barang atau jasa disebut ...",
+                "opsi": [
+                  "konsumsi",
+                  "distribusi",
+                  "produksi",
+                  "promosi"
+                ],
+                "jawab": 2,
+                "bahas": "Produksi adalah kegiatan menghasilkan barang atau jasa."
+              },
+              {
+                "q": "Danau tiga warna yang terkenal di Pulau Flores adalah ...",
+                "opsi": [
+                  "Danau Toba",
+                  "Danau Kelimutu",
+                  "Danau Poso",
+                  "Danau Sentani"
+                ],
+                "jawab": 1,
+                "bahas": "Danau Kelimutu berada di Kabupaten Ende."
+              }
+            ]
+          },
+          {
+            "nama": "Bahasa Inggris",
+            "warna": "#a855f7",
+            "waktu": 30,
+            "jumlah": 5,
+            "soal": [
+              {
+                "q": "'Apple' dalam bahasa Indonesia adalah ...",
+                "opsi": [
+                  "jeruk",
+                  "apel",
+                  "pisang",
+                  "anggur"
+                ],
+                "jawab": 1,
+                "bahas": "Apple = apel."
+              },
+              {
+                "q": "Choose the correct sentence.",
+                "opsi": [
+                  "She go to school.",
+                  "She goes to school.",
+                  "She going to school.",
+                  "She gone to school."
+                ],
+                "jawab": 1,
+                "bahas": "Subjek she memakai kata kerja + s/es: goes."
+              },
+              {
+                "q": "What is the opposite of 'hot'?",
+                "opsi": [
+                  "warm",
+                  "cold",
+                  "big",
+                  "fast"
+                ],
+                "jawab": 1,
+                "bahas": "Hot (panas) lawannya cold (dingin)."
+              },
+              {
+                "q": "'Good morning' diucapkan pada waktu ...",
+                "opsi": [
+                  "pagi",
+                  "siang",
+                  "sore",
+                  "malam"
+                ],
+                "jawab": 0,
+                "bahas": "Good morning = selamat pagi."
+              },
+              {
+                "q": "I ___ a student.",
+                "opsi": [
+                  "am",
+                  "is",
+                  "are",
+                  "be"
+                ],
+                "jawab": 0,
+                "bahas": "Subjek I memakai 'am'."
+              },
+              {
+                "q": "How many legs does a cat have?",
+                "opsi": [
+                  "two",
+                  "three",
+                  "four",
+                  "six"
+                ],
+                "jawab": 2,
+                "bahas": "Kucing memiliki empat (four) kaki."
+              }
+            ]
+          },
+          {
+            "nama": "Informatika",
+            "warna": "#14b8a6",
+            "waktu": 30,
+            "jumlah": 5,
+            "soal": [
+              {
+                "q": "Perangkat yang digunakan untuk mengetik pada komputer adalah ...",
+                "opsi": [
+                  "mouse",
+                  "keyboard",
+                  "monitor",
+                  "speaker"
+                ],
+                "jawab": 1,
+                "bahas": "Keyboard adalah perangkat input untuk mengetik."
+              },
+              {
+                "q": "Langkah-langkah logis dan berurutan untuk menyelesaikan masalah disebut ...",
+                "opsi": [
+                  "algoritma",
+                  "aplikasi",
+                  "internet",
+                  "virus"
+                ],
+                "jawab": 0,
+                "bahas": "Algoritma adalah urutan langkah penyelesaian masalah."
+              },
+              {
+                "q": "Contoh perangkat output adalah ...",
+                "opsi": [
+                  "scanner",
+                  "mikrofon",
+                  "printer",
+                  "keyboard"
+                ],
+                "jawab": 2,
+                "bahas": "Printer mengeluarkan hasil cetak (output)."
+              },
+              {
+                "q": "Kata sandi yang paling aman adalah ...",
+                "opsi": [
+                  "123456",
+                  "namaku",
+                  "Rata#2026!kopi",
+                  "password"
+                ],
+                "jawab": 2,
+                "bahas": "Sandi kuat memadukan huruf besar, kecil, angka, dan simbol."
+              },
+              {
+                "q": "1 byte terdiri dari ... bit.",
+                "opsi": [
+                  "2",
+                  "4",
+                  "8",
+                  "16"
+                ],
+                "jawab": 2,
+                "bahas": "1 byte = 8 bit."
+              },
+              {
+                "q": "Sikap yang tepat saat menerima pesan berantai yang belum jelas kebenarannya adalah ...",
+                "opsi": [
+                  "langsung disebarkan",
+                  "cek kebenarannya dulu",
+                  "hapus semua kontak",
+                  "balas dengan marah"
+                ],
+                "jawab": 1,
+                "bahas": "Selalu periksa kebenaran informasi sebelum menyebarkannya."
+              }
+            ]
+          }
+        ]
+      },
+      "soal_pk": "RPETLM",
+      "soal_diubah": 1793619253585,
       "bukti": "Akses Gratis EduVerse",
       "catatan": "",
       "total_bayar": 0
@@ -145,6 +627,502 @@
       "bank": true,
       "bank_t": 1793416188529,
       "bank_pakai": 0
+    },
+    "RPETLM": {
+      "kode": "RPETLM",
+      "guru_id": 2,
+      "guru": "Tim EduVerse",
+      "sekolah": "Sekolah EduVerse",
+      "judul": "Paket Contoh EduVerse",
+      "paket": {
+        "judul": "Paket Contoh EduVerse",
+        "guru": "Tim EduVerse",
+        "jenjang": "Umum (SD sampai SMA/SMK)",
+        "mapel": [
+          {
+            "nama": "Numerasi",
+            "warna": "#ef4444",
+            "waktu": 30,
+            "jumlah": 5,
+            "materi": [
+              {
+                "judul": "Ringkasan: Pecahan, Persen, dan Rata-rata",
+                "jenis": "teks",
+                "isi": "Pecahan senilai adalah pecahan yang nilainya sama walaupun angkanya berbeda. Caranya: kalikan atau bagi pembilang dan penyebut dengan bilangan yang sama.\nContoh: 3/4 = 6/8 = 9/12.\n\nPersen artinya per seratus. 20% sama dengan 20/100. Untuk mencari 20% dari 50.000, hitung 20/100 × 50.000 = 10.000.\n\nRata-rata = jumlah semua data dibagi banyak data. Contoh: rata-rata 6, 8, dan 10 adalah (6 + 8 + 10) : 3 = 8."
+              }
+            ],
+            "soal": [
+              {
+                "q": "Hasil dari 125 + 378 adalah ...",
+                "opsi": [
+                  "493",
+                  "503",
+                  "513",
+                  "403"
+                ],
+                "jawab": 1,
+                "bahas": "125 + 378 = 503."
+              },
+              {
+                "q": "Ibu membeli 3 kotak kue. Setiap kotak berisi 12 kue. Berapa jumlah kue seluruhnya?",
+                "opsi": [
+                  "15",
+                  "24",
+                  "36",
+                  "48"
+                ],
+                "jawab": 2,
+                "bahas": "3 × 12 = 36 kue."
+              },
+              {
+                "q": "Keliling persegi dengan sisi 9 cm adalah ...",
+                "opsi": [
+                  "18 cm",
+                  "27 cm",
+                  "36 cm",
+                  "81 cm"
+                ],
+                "jawab": 2,
+                "bahas": "Keliling persegi = 4 × sisi = 4 × 9 = 36 cm."
+              },
+              {
+                "q": "Pecahan 3/4 senilai dengan ...",
+                "opsi": [
+                  "6/8",
+                  "3/8",
+                  "4/3",
+                  "9/16"
+                ],
+                "jawab": 0,
+                "bahas": "3/4 dikali 2/2 menjadi 6/8."
+              },
+              {
+                "q": "Jika 2x + 5 = 17, nilai x adalah ...",
+                "opsi": [
+                  "5",
+                  "6",
+                  "7",
+                  "11"
+                ],
+                "jawab": 1,
+                "bahas": "2x = 17 − 5 = 12, maka x = 6."
+              },
+              {
+                "q": "Diskon 20% dari harga Rp50.000 adalah ...",
+                "opsi": [
+                  "Rp5.000",
+                  "Rp10.000",
+                  "Rp20.000",
+                  "Rp40.000"
+                ],
+                "jawab": 1,
+                "bahas": "20% × 50.000 = 10.000."
+              },
+              {
+                "q": "Rata-rata dari 6, 8, dan 10 adalah ...",
+                "opsi": [
+                  "7",
+                  "8",
+                  "9",
+                  "24"
+                ],
+                "jawab": 1,
+                "bahas": "(6 + 8 + 10) : 3 = 24 : 3 = 8."
+              }
+            ]
+          },
+          {
+            "nama": "Literasi",
+            "warna": "#3b82f6",
+            "waktu": 30,
+            "jumlah": 5,
+            "materi": [
+              {
+                "judul": "Ringkasan: Fakta, Opini, dan Ide Pokok",
+                "jenis": "teks",
+                "isi": "Fakta adalah informasi yang benar-benar terjadi dan bisa dibuktikan. Contoh: Gunung Inerie terletak di Pulau Flores.\n\nOpini adalah pendapat seseorang yang belum tentu sama dengan pendapat orang lain. Opini sering ditandai kata menurutku, sebaiknya, mungkin, atau paling.\n\nIde pokok paragraf biasanya terdapat pada kalimat utama, yaitu di awal atau di akhir paragraf."
+              }
+            ],
+            "soal": [
+              {
+                "q": "Sinonim kata 'gembira' adalah ...",
+                "opsi": [
+                  "sedih",
+                  "senang",
+                  "marah",
+                  "takut"
+                ],
+                "jawab": 1,
+                "bahas": "Gembira bermakna sama dengan senang."
+              },
+              {
+                "q": "Kalimat berikut yang merupakan opini adalah ...",
+                "opsi": [
+                  "Gunung Inerie terletak di Flores.",
+                  "Menurutku, pantai itu paling indah.",
+                  "Air mendidih pada suhu 100°C.",
+                  "Satu minggu ada tujuh hari."
+                ],
+                "jawab": 1,
+                "bahas": "Kata 'menurutku' menandakan pendapat pribadi (opini)."
+              },
+              {
+                "q": "Ide pokok paragraf biasanya terdapat pada ...",
+                "opsi": [
+                  "kalimat utama",
+                  "kalimat penjelas",
+                  "judul",
+                  "tanda baca"
+                ],
+                "jawab": 0,
+                "bahas": "Ide pokok dinyatakan dalam kalimat utama."
+              },
+              {
+                "q": "Antonim kata 'rajin' adalah ...",
+                "opsi": [
+                  "pintar",
+                  "malas",
+                  "tekun",
+                  "giat"
+                ],
+                "jawab": 1,
+                "bahas": "Lawan kata rajin adalah malas."
+              },
+              {
+                "q": "Teks yang bertujuan meyakinkan atau mengajak pembaca disebut teks ...",
+                "opsi": [
+                  "narasi",
+                  "deskripsi",
+                  "persuasi",
+                  "prosedur"
+                ],
+                "jawab": 2,
+                "bahas": "Teks persuasi berisi ajakan atau bujukan."
+              },
+              {
+                "q": "Penulisan huruf kapital yang benar adalah ...",
+                "opsi": [
+                  "saya tinggal di kupang.",
+                  "Saya tinggal di Kupang.",
+                  "saya Tinggal di kupang.",
+                  "Saya Tinggal Di Kupang."
+                ],
+                "jawab": 1,
+                "bahas": "Huruf kapital dipakai di awal kalimat dan nama tempat."
+              }
+            ]
+          },
+          {
+            "nama": "IPA",
+            "warna": "#22c55e",
+            "waktu": 30,
+            "jumlah": 5,
+            "materi": [
+              {
+                "judul": "Ringkasan: Fotosintesis dan Wujud Zat",
+                "jenis": "teks",
+                "isi": "Fotosintesis adalah proses tumbuhan hijau membuat makanan sendiri. Bahannya air, karbon dioksida, dan cahaya matahari. Hasilnya gula (makanan) dan oksigen.\n\nPerubahan wujud zat:\n• Mencair: padat menjadi cair\n• Membeku: cair menjadi padat\n• Menguap: cair menjadi gas\n• Mengembun: gas menjadi cair"
+              }
+            ],
+            "soal": [
+              {
+                "q": "Proses tumbuhan membuat makanan sendiri disebut ...",
+                "opsi": [
+                  "respirasi",
+                  "fotosintesis",
+                  "evaporasi",
+                  "transpirasi"
+                ],
+                "jawab": 1,
+                "bahas": "Fotosintesis memerlukan cahaya matahari, air, dan karbon dioksida."
+              },
+              {
+                "q": "Planet yang paling dekat dengan Matahari adalah ...",
+                "opsi": [
+                  "Venus",
+                  "Bumi",
+                  "Merkurius",
+                  "Mars"
+                ],
+                "jawab": 2,
+                "bahas": "Merkurius adalah planet terdekat dari Matahari."
+              },
+              {
+                "q": "Perubahan wujud dari cair menjadi gas disebut ...",
+                "opsi": [
+                  "membeku",
+                  "mencair",
+                  "menguap",
+                  "mengembun"
+                ],
+                "jawab": 2,
+                "bahas": "Contohnya air yang dipanaskan berubah menjadi uap."
+              },
+              {
+                "q": "Organ tubuh yang berfungsi memompa darah adalah ...",
+                "opsi": [
+                  "paru-paru",
+                  "jantung",
+                  "hati",
+                  "ginjal"
+                ],
+                "jawab": 1,
+                "bahas": "Jantung memompa darah ke seluruh tubuh."
+              },
+              {
+                "q": "Satuan gaya dalam Sistem Internasional adalah ...",
+                "opsi": [
+                  "Joule",
+                  "Newton",
+                  "Watt",
+                  "Pascal"
+                ],
+                "jawab": 1,
+                "bahas": "Satuan gaya adalah Newton (N)."
+              },
+              {
+                "q": "Hewan yang hanya memakan tumbuhan disebut ...",
+                "opsi": [
+                  "karnivora",
+                  "herbivora",
+                  "omnivora",
+                  "pengurai"
+                ],
+                "jawab": 1,
+                "bahas": "Herbivora adalah pemakan tumbuhan, misalnya sapi dan kambing."
+              }
+            ]
+          },
+          {
+            "nama": "IPS & PPKn",
+            "warna": "#f97316",
+            "waktu": 30,
+            "jumlah": 5,
+            "soal": [
+              {
+                "q": "Ibu kota Provinsi Nusa Tenggara Timur adalah ...",
+                "opsi": [
+                  "Kupang",
+                  "Ende",
+                  "Maumere",
+                  "Labuan Bajo"
+                ],
+                "jawab": 0,
+                "bahas": "Ibu kota NTT adalah Kupang."
+              },
+              {
+                "q": "Bunyi sila pertama Pancasila adalah ...",
+                "opsi": [
+                  "Persatuan Indonesia",
+                  "Ketuhanan Yang Maha Esa",
+                  "Kemanusiaan yang adil dan beradab",
+                  "Keadilan sosial bagi seluruh rakyat Indonesia"
+                ],
+                "jawab": 1,
+                "bahas": "Sila pertama: Ketuhanan Yang Maha Esa."
+              },
+              {
+                "q": "Proklamasi kemerdekaan Indonesia dibacakan pada tahun ...",
+                "opsi": [
+                  "1942",
+                  "1945",
+                  "1950",
+                  "1959"
+                ],
+                "jawab": 1,
+                "bahas": "Proklamasi dibacakan pada 17 Agustus 1945."
+              },
+              {
+                "q": "Semboyan negara Indonesia adalah ...",
+                "opsi": [
+                  "Tut Wuri Handayani",
+                  "Bhinneka Tunggal Ika",
+                  "Garuda Pancasila",
+                  "Merdeka atau Mati"
+                ],
+                "jawab": 1,
+                "bahas": "Bhinneka Tunggal Ika berarti berbeda-beda tetapi tetap satu."
+              },
+              {
+                "q": "Kegiatan menghasilkan barang atau jasa disebut ...",
+                "opsi": [
+                  "konsumsi",
+                  "distribusi",
+                  "produksi",
+                  "promosi"
+                ],
+                "jawab": 2,
+                "bahas": "Produksi adalah kegiatan menghasilkan barang atau jasa."
+              },
+              {
+                "q": "Danau tiga warna yang terkenal di Pulau Flores adalah ...",
+                "opsi": [
+                  "Danau Toba",
+                  "Danau Kelimutu",
+                  "Danau Poso",
+                  "Danau Sentani"
+                ],
+                "jawab": 1,
+                "bahas": "Danau Kelimutu berada di Kabupaten Ende."
+              }
+            ]
+          },
+          {
+            "nama": "Bahasa Inggris",
+            "warna": "#a855f7",
+            "waktu": 30,
+            "jumlah": 5,
+            "soal": [
+              {
+                "q": "'Apple' dalam bahasa Indonesia adalah ...",
+                "opsi": [
+                  "jeruk",
+                  "apel",
+                  "pisang",
+                  "anggur"
+                ],
+                "jawab": 1,
+                "bahas": "Apple = apel."
+              },
+              {
+                "q": "Choose the correct sentence.",
+                "opsi": [
+                  "She go to school.",
+                  "She goes to school.",
+                  "She going to school.",
+                  "She gone to school."
+                ],
+                "jawab": 1,
+                "bahas": "Subjek she memakai kata kerja + s/es: goes."
+              },
+              {
+                "q": "What is the opposite of 'hot'?",
+                "opsi": [
+                  "warm",
+                  "cold",
+                  "big",
+                  "fast"
+                ],
+                "jawab": 1,
+                "bahas": "Hot (panas) lawannya cold (dingin)."
+              },
+              {
+                "q": "'Good morning' diucapkan pada waktu ...",
+                "opsi": [
+                  "pagi",
+                  "siang",
+                  "sore",
+                  "malam"
+                ],
+                "jawab": 0,
+                "bahas": "Good morning = selamat pagi."
+              },
+              {
+                "q": "I ___ a student.",
+                "opsi": [
+                  "am",
+                  "is",
+                  "are",
+                  "be"
+                ],
+                "jawab": 0,
+                "bahas": "Subjek I memakai 'am'."
+              },
+              {
+                "q": "How many legs does a cat have?",
+                "opsi": [
+                  "two",
+                  "three",
+                  "four",
+                  "six"
+                ],
+                "jawab": 2,
+                "bahas": "Kucing memiliki empat (four) kaki."
+              }
+            ]
+          },
+          {
+            "nama": "Informatika",
+            "warna": "#14b8a6",
+            "waktu": 30,
+            "jumlah": 5,
+            "soal": [
+              {
+                "q": "Perangkat yang digunakan untuk mengetik pada komputer adalah ...",
+                "opsi": [
+                  "mouse",
+                  "keyboard",
+                  "monitor",
+                  "speaker"
+                ],
+                "jawab": 1,
+                "bahas": "Keyboard adalah perangkat input untuk mengetik."
+              },
+              {
+                "q": "Langkah-langkah logis dan berurutan untuk menyelesaikan masalah disebut ...",
+                "opsi": [
+                  "algoritma",
+                  "aplikasi",
+                  "internet",
+                  "virus"
+                ],
+                "jawab": 0,
+                "bahas": "Algoritma adalah urutan langkah penyelesaian masalah."
+              },
+              {
+                "q": "Contoh perangkat output adalah ...",
+                "opsi": [
+                  "scanner",
+                  "mikrofon",
+                  "printer",
+                  "keyboard"
+                ],
+                "jawab": 2,
+                "bahas": "Printer mengeluarkan hasil cetak (output)."
+              },
+              {
+                "q": "Kata sandi yang paling aman adalah ...",
+                "opsi": [
+                  "123456",
+                  "namaku",
+                  "Rata#2026!kopi",
+                  "password"
+                ],
+                "jawab": 2,
+                "bahas": "Sandi kuat memadukan huruf besar, kecil, angka, dan simbol."
+              },
+              {
+                "q": "1 byte terdiri dari ... bit.",
+                "opsi": [
+                  "2",
+                  "4",
+                  "8",
+                  "16"
+                ],
+                "jawab": 2,
+                "bahas": "1 byte = 8 bit."
+              },
+              {
+                "q": "Sikap yang tepat saat menerima pesan berantai yang belum jelas kebenarannya adalah ...",
+                "opsi": [
+                  "langsung disebarkan",
+                  "cek kebenarannya dulu",
+                  "hapus semua kontak",
+                  "balas dengan marah"
+                ],
+                "jawab": 1,
+                "bahas": "Selalu periksa kebenaran informasi sebelum menyebarkannya."
+              }
+            ]
+          }
+        ]
+      },
+      "diubah": 1793619252739,
+      "dibuka": 0,
+      "publik": true,
+      "bank": false,
+      "bank_t": 0,
+      "bank_pakai": 0
     }
   },
   "kelas": {
@@ -206,6 +1184,538 @@
       "kunci": false,
       "rekap": null,
       "dibuat": 1793416188536
+    },
+    "9ERHDZ": {
+      "kode": "9ERHDZ",
+      "guru_id": 2,
+      "nama": "Kelas 7B",
+      "guru": "Pak Zul",
+      "pin": "443588",
+      "paket": {
+        "judul": "Paket Contoh EduVerse",
+        "guru": "Tim EduVerse",
+        "jenjang": "Umum (SD sampai SMA/SMK)",
+        "mapel": [
+          {
+            "nama": "Numerasi",
+            "warna": "#ef4444",
+            "waktu": 30,
+            "jumlah": 5,
+            "materi": [
+              {
+                "judul": "Ringkasan: Pecahan, Persen, dan Rata-rata",
+                "jenis": "teks",
+                "isi": "Pecahan senilai adalah pecahan yang nilainya sama walaupun angkanya berbeda. Caranya: kalikan atau bagi pembilang dan penyebut dengan bilangan yang sama.\nContoh: 3/4 = 6/8 = 9/12.\n\nPersen artinya per seratus. 20% sama dengan 20/100. Untuk mencari 20% dari 50.000, hitung 20/100 × 50.000 = 10.000.\n\nRata-rata = jumlah semua data dibagi banyak data. Contoh: rata-rata 6, 8, dan 10 adalah (6 + 8 + 10) : 3 = 8."
+              }
+            ],
+            "soal": [
+              {
+                "q": "Hasil dari 125 + 378 adalah ...",
+                "opsi": [
+                  "493",
+                  "503",
+                  "513",
+                  "403"
+                ],
+                "jawab": 1,
+                "bahas": "125 + 378 = 503."
+              },
+              {
+                "q": "Ibu membeli 3 kotak kue. Setiap kotak berisi 12 kue. Berapa jumlah kue seluruhnya?",
+                "opsi": [
+                  "15",
+                  "24",
+                  "36",
+                  "48"
+                ],
+                "jawab": 2,
+                "bahas": "3 × 12 = 36 kue."
+              },
+              {
+                "q": "Keliling persegi dengan sisi 9 cm adalah ...",
+                "opsi": [
+                  "18 cm",
+                  "27 cm",
+                  "36 cm",
+                  "81 cm"
+                ],
+                "jawab": 2,
+                "bahas": "Keliling persegi = 4 × sisi = 4 × 9 = 36 cm."
+              },
+              {
+                "q": "Pecahan 3/4 senilai dengan ...",
+                "opsi": [
+                  "6/8",
+                  "3/8",
+                  "4/3",
+                  "9/16"
+                ],
+                "jawab": 0,
+                "bahas": "3/4 dikali 2/2 menjadi 6/8."
+              },
+              {
+                "q": "Jika 2x + 5 = 17, nilai x adalah ...",
+                "opsi": [
+                  "5",
+                  "6",
+                  "7",
+                  "11"
+                ],
+                "jawab": 1,
+                "bahas": "2x = 17 − 5 = 12, maka x = 6."
+              },
+              {
+                "q": "Diskon 20% dari harga Rp50.000 adalah ...",
+                "opsi": [
+                  "Rp5.000",
+                  "Rp10.000",
+                  "Rp20.000",
+                  "Rp40.000"
+                ],
+                "jawab": 1,
+                "bahas": "20% × 50.000 = 10.000."
+              },
+              {
+                "q": "Rata-rata dari 6, 8, dan 10 adalah ...",
+                "opsi": [
+                  "7",
+                  "8",
+                  "9",
+                  "24"
+                ],
+                "jawab": 1,
+                "bahas": "(6 + 8 + 10) : 3 = 24 : 3 = 8."
+              }
+            ]
+          },
+          {
+            "nama": "Literasi",
+            "warna": "#3b82f6",
+            "waktu": 30,
+            "jumlah": 5,
+            "materi": [
+              {
+                "judul": "Ringkasan: Fakta, Opini, dan Ide Pokok",
+                "jenis": "teks",
+                "isi": "Fakta adalah informasi yang benar-benar terjadi dan bisa dibuktikan. Contoh: Gunung Inerie terletak di Pulau Flores.\n\nOpini adalah pendapat seseorang yang belum tentu sama dengan pendapat orang lain. Opini sering ditandai kata menurutku, sebaiknya, mungkin, atau paling.\n\nIde pokok paragraf biasanya terdapat pada kalimat utama, yaitu di awal atau di akhir paragraf."
+              }
+            ],
+            "soal": [
+              {
+                "q": "Sinonim kata 'gembira' adalah ...",
+                "opsi": [
+                  "sedih",
+                  "senang",
+                  "marah",
+                  "takut"
+                ],
+                "jawab": 1,
+                "bahas": "Gembira bermakna sama dengan senang."
+              },
+              {
+                "q": "Kalimat berikut yang merupakan opini adalah ...",
+                "opsi": [
+                  "Gunung Inerie terletak di Flores.",
+                  "Menurutku, pantai itu paling indah.",
+                  "Air mendidih pada suhu 100°C.",
+                  "Satu minggu ada tujuh hari."
+                ],
+                "jawab": 1,
+                "bahas": "Kata 'menurutku' menandakan pendapat pribadi (opini)."
+              },
+              {
+                "q": "Ide pokok paragraf biasanya terdapat pada ...",
+                "opsi": [
+                  "kalimat utama",
+                  "kalimat penjelas",
+                  "judul",
+                  "tanda baca"
+                ],
+                "jawab": 0,
+                "bahas": "Ide pokok dinyatakan dalam kalimat utama."
+              },
+              {
+                "q": "Antonim kata 'rajin' adalah ...",
+                "opsi": [
+                  "pintar",
+                  "malas",
+                  "tekun",
+                  "giat"
+                ],
+                "jawab": 1,
+                "bahas": "Lawan kata rajin adalah malas."
+              },
+              {
+                "q": "Teks yang bertujuan meyakinkan atau mengajak pembaca disebut teks ...",
+                "opsi": [
+                  "narasi",
+                  "deskripsi",
+                  "persuasi",
+                  "prosedur"
+                ],
+                "jawab": 2,
+                "bahas": "Teks persuasi berisi ajakan atau bujukan."
+              },
+              {
+                "q": "Penulisan huruf kapital yang benar adalah ...",
+                "opsi": [
+                  "saya tinggal di kupang.",
+                  "Saya tinggal di Kupang.",
+                  "saya Tinggal di kupang.",
+                  "Saya Tinggal Di Kupang."
+                ],
+                "jawab": 1,
+                "bahas": "Huruf kapital dipakai di awal kalimat dan nama tempat."
+              }
+            ]
+          },
+          {
+            "nama": "IPA",
+            "warna": "#22c55e",
+            "waktu": 30,
+            "jumlah": 5,
+            "materi": [
+              {
+                "judul": "Ringkasan: Fotosintesis dan Wujud Zat",
+                "jenis": "teks",
+                "isi": "Fotosintesis adalah proses tumbuhan hijau membuat makanan sendiri. Bahannya air, karbon dioksida, dan cahaya matahari. Hasilnya gula (makanan) dan oksigen.\n\nPerubahan wujud zat:\n• Mencair: padat menjadi cair\n• Membeku: cair menjadi padat\n• Menguap: cair menjadi gas\n• Mengembun: gas menjadi cair"
+              }
+            ],
+            "soal": [
+              {
+                "q": "Proses tumbuhan membuat makanan sendiri disebut ...",
+                "opsi": [
+                  "respirasi",
+                  "fotosintesis",
+                  "evaporasi",
+                  "transpirasi"
+                ],
+                "jawab": 1,
+                "bahas": "Fotosintesis memerlukan cahaya matahari, air, dan karbon dioksida."
+              },
+              {
+                "q": "Planet yang paling dekat dengan Matahari adalah ...",
+                "opsi": [
+                  "Venus",
+                  "Bumi",
+                  "Merkurius",
+                  "Mars"
+                ],
+                "jawab": 2,
+                "bahas": "Merkurius adalah planet terdekat dari Matahari."
+              },
+              {
+                "q": "Perubahan wujud dari cair menjadi gas disebut ...",
+                "opsi": [
+                  "membeku",
+                  "mencair",
+                  "menguap",
+                  "mengembun"
+                ],
+                "jawab": 2,
+                "bahas": "Contohnya air yang dipanaskan berubah menjadi uap."
+              },
+              {
+                "q": "Organ tubuh yang berfungsi memompa darah adalah ...",
+                "opsi": [
+                  "paru-paru",
+                  "jantung",
+                  "hati",
+                  "ginjal"
+                ],
+                "jawab": 1,
+                "bahas": "Jantung memompa darah ke seluruh tubuh."
+              },
+              {
+                "q": "Satuan gaya dalam Sistem Internasional adalah ...",
+                "opsi": [
+                  "Joule",
+                  "Newton",
+                  "Watt",
+                  "Pascal"
+                ],
+                "jawab": 1,
+                "bahas": "Satuan gaya adalah Newton (N)."
+              },
+              {
+                "q": "Hewan yang hanya memakan tumbuhan disebut ...",
+                "opsi": [
+                  "karnivora",
+                  "herbivora",
+                  "omnivora",
+                  "pengurai"
+                ],
+                "jawab": 1,
+                "bahas": "Herbivora adalah pemakan tumbuhan, misalnya sapi dan kambing."
+              }
+            ]
+          },
+          {
+            "nama": "IPS & PPKn",
+            "warna": "#f97316",
+            "waktu": 30,
+            "jumlah": 5,
+            "soal": [
+              {
+                "q": "Ibu kota Provinsi Nusa Tenggara Timur adalah ...",
+                "opsi": [
+                  "Kupang",
+                  "Ende",
+                  "Maumere",
+                  "Labuan Bajo"
+                ],
+                "jawab": 0,
+                "bahas": "Ibu kota NTT adalah Kupang."
+              },
+              {
+                "q": "Bunyi sila pertama Pancasila adalah ...",
+                "opsi": [
+                  "Persatuan Indonesia",
+                  "Ketuhanan Yang Maha Esa",
+                  "Kemanusiaan yang adil dan beradab",
+                  "Keadilan sosial bagi seluruh rakyat Indonesia"
+                ],
+                "jawab": 1,
+                "bahas": "Sila pertama: Ketuhanan Yang Maha Esa."
+              },
+              {
+                "q": "Proklamasi kemerdekaan Indonesia dibacakan pada tahun ...",
+                "opsi": [
+                  "1942",
+                  "1945",
+                  "1950",
+                  "1959"
+                ],
+                "jawab": 1,
+                "bahas": "Proklamasi dibacakan pada 17 Agustus 1945."
+              },
+              {
+                "q": "Semboyan negara Indonesia adalah ...",
+                "opsi": [
+                  "Tut Wuri Handayani",
+                  "Bhinneka Tunggal Ika",
+                  "Garuda Pancasila",
+                  "Merdeka atau Mati"
+                ],
+                "jawab": 1,
+                "bahas": "Bhinneka Tunggal Ika berarti berbeda-beda tetapi tetap satu."
+              },
+              {
+                "q": "Kegiatan menghasilkan barang atau jasa disebut ...",
+                "opsi": [
+                  "konsumsi",
+                  "distribusi",
+                  "produksi",
+                  "promosi"
+                ],
+                "jawab": 2,
+                "bahas": "Produksi adalah kegiatan menghasilkan barang atau jasa."
+              },
+              {
+                "q": "Danau tiga warna yang terkenal di Pulau Flores adalah ...",
+                "opsi": [
+                  "Danau Toba",
+                  "Danau Kelimutu",
+                  "Danau Poso",
+                  "Danau Sentani"
+                ],
+                "jawab": 1,
+                "bahas": "Danau Kelimutu berada di Kabupaten Ende."
+              }
+            ]
+          },
+          {
+            "nama": "Bahasa Inggris",
+            "warna": "#a855f7",
+            "waktu": 30,
+            "jumlah": 5,
+            "soal": [
+              {
+                "q": "'Apple' dalam bahasa Indonesia adalah ...",
+                "opsi": [
+                  "jeruk",
+                  "apel",
+                  "pisang",
+                  "anggur"
+                ],
+                "jawab": 1,
+                "bahas": "Apple = apel."
+              },
+              {
+                "q": "Choose the correct sentence.",
+                "opsi": [
+                  "She go to school.",
+                  "She goes to school.",
+                  "She going to school.",
+                  "She gone to school."
+                ],
+                "jawab": 1,
+                "bahas": "Subjek she memakai kata kerja + s/es: goes."
+              },
+              {
+                "q": "What is the opposite of 'hot'?",
+                "opsi": [
+                  "warm",
+                  "cold",
+                  "big",
+                  "fast"
+                ],
+                "jawab": 1,
+                "bahas": "Hot (panas) lawannya cold (dingin)."
+              },
+              {
+                "q": "'Good morning' diucapkan pada waktu ...",
+                "opsi": [
+                  "pagi",
+                  "siang",
+                  "sore",
+                  "malam"
+                ],
+                "jawab": 0,
+                "bahas": "Good morning = selamat pagi."
+              },
+              {
+                "q": "I ___ a student.",
+                "opsi": [
+                  "am",
+                  "is",
+                  "are",
+                  "be"
+                ],
+                "jawab": 0,
+                "bahas": "Subjek I memakai 'am'."
+              },
+              {
+                "q": "How many legs does a cat have?",
+                "opsi": [
+                  "two",
+                  "three",
+                  "four",
+                  "six"
+                ],
+                "jawab": 2,
+                "bahas": "Kucing memiliki empat (four) kaki."
+              }
+            ]
+          },
+          {
+            "nama": "Informatika",
+            "warna": "#14b8a6",
+            "waktu": 30,
+            "jumlah": 5,
+            "soal": [
+              {
+                "q": "Perangkat yang digunakan untuk mengetik pada komputer adalah ...",
+                "opsi": [
+                  "mouse",
+                  "keyboard",
+                  "monitor",
+                  "speaker"
+                ],
+                "jawab": 1,
+                "bahas": "Keyboard adalah perangkat input untuk mengetik."
+              },
+              {
+                "q": "Langkah-langkah logis dan berurutan untuk menyelesaikan masalah disebut ...",
+                "opsi": [
+                  "algoritma",
+                  "aplikasi",
+                  "internet",
+                  "virus"
+                ],
+                "jawab": 0,
+                "bahas": "Algoritma adalah urutan langkah penyelesaian masalah."
+              },
+              {
+                "q": "Contoh perangkat output adalah ...",
+                "opsi": [
+                  "scanner",
+                  "mikrofon",
+                  "printer",
+                  "keyboard"
+                ],
+                "jawab": 2,
+                "bahas": "Printer mengeluarkan hasil cetak (output)."
+              },
+              {
+                "q": "Kata sandi yang paling aman adalah ...",
+                "opsi": [
+                  "123456",
+                  "namaku",
+                  "Rata#2026!kopi",
+                  "password"
+                ],
+                "jawab": 2,
+                "bahas": "Sandi kuat memadukan huruf besar, kecil, angka, dan simbol."
+              },
+              {
+                "q": "1 byte terdiri dari ... bit.",
+                "opsi": [
+                  "2",
+                  "4",
+                  "8",
+                  "16"
+                ],
+                "jawab": 2,
+                "bahas": "1 byte = 8 bit."
+              },
+              {
+                "q": "Sikap yang tepat saat menerima pesan berantai yang belum jelas kebenarannya adalah ...",
+                "opsi": [
+                  "langsung disebarkan",
+                  "cek kebenarannya dulu",
+                  "hapus semua kontak",
+                  "balas dengan marah"
+                ],
+                "jawab": 1,
+                "bahas": "Selalu periksa kebenaran informasi sebelum menyebarkannya."
+              }
+            ]
+          }
+        ]
+      },
+      "paket_kode": "RPETLM",
+      "diubah": 1793619252773,
+      "kunci": false,
+      "rekap": null,
+      "dibuat": 1793619252773,
+      "_fromMurid": false,
+      "guru_3d": {
+        "id": "g1",
+        "g": true,
+        "nama": "Pak Zul",
+        "z": "lobi2",
+        "o": {
+          "kulit": "k2",
+          "rambut": "r_pendek",
+          "wrambut": "w1",
+          "topi": "t_mahkota",
+          "atasan": "a_hoodie",
+          "bawahan": "b8",
+          "wajah": "f_kh",
+          "leher": "l0",
+          "punggung": "p0"
+        },
+        "p": [
+          -0.27,
+          0.2,
+          -2.44,
+          3.14
+        ],
+        "lv": 99,
+        "sc": {
+          "lv": 99,
+          "bh": 0,
+          "g": 0
+        },
+        "st": {
+          "s": "main",
+          "m": ""
+        },
+        "aktif": 1793621423478,
+        "emo": null,
+        "emoAt": 0
+      }
     }
   },
   "murid": [
@@ -217,6 +1727,84 @@
       "token": "29b224e050c9b49e0327b73c727ec7bf",
       "aktif": 1793416188543,
       "blokir": false
+    },
+    {
+      "id": 2,
+      "kelas_kode": "9ERHDZ",
+      "nama": "Lala",
+      "absen": 7,
+      "token": "47530bfb67db2d28df14cf52285176dc",
+      "aktif": 1793620852814,
+      "blokir": false,
+      "z": "kota",
+      "o": {
+        "kulit": "k2",
+        "rambut": "r_pendek",
+        "wrambut": "w1",
+        "topi": "t0",
+        "atasan": "a_sd",
+        "bawahan": "b2",
+        "wajah": "f0",
+        "leher": "l0",
+        "punggung": "p0"
+      },
+      "p": [
+        0,
+        0.3,
+        -6,
+        0
+      ],
+      "sc": {
+        "lv": 1,
+        "bh": 0,
+        "g": 0
+      },
+      "st": {
+        "s": "main",
+        "m": "",
+        "q": null
+      },
+      "siap_id": 0,
+      "siap_t": 0
+    },
+    {
+      "id": 3,
+      "kelas_kode": "9ERHDZ",
+      "nama": "hana",
+      "absen": 8,
+      "token": "802603adb1ad0c88af745fee459eacb9",
+      "aktif": 1793621472478,
+      "blokir": false,
+      "z": "lobi2",
+      "o": {
+        "kulit": "k2",
+        "rambut": "r_pendek",
+        "wrambut": "w1",
+        "topi": "t0",
+        "atasan": "a_sd",
+        "bawahan": "b2",
+        "wajah": "f0",
+        "leher": "l0",
+        "punggung": "p0"
+      },
+      "p": [
+        0,
+        -91.7,
+        0,
+        0
+      ],
+      "sc": {
+        "lv": 1,
+        "bh": 0,
+        "g": 0
+      },
+      "st": {
+        "s": "main",
+        "m": "",
+        "q": null
+      },
+      "siap_id": 2,
+      "siap_t": 1793621472478
     }
   ],
   "sesi": [
@@ -240,6 +1828,27 @@
       "skor": null,
       "maks": null,
       "lari": 0
+    },
+    {
+      "id": 2,
+      "cid": "mvz7h5vkv2jqx1",
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 2,
+      "mapel_id": "_gabung",
+      "mapel_nama": "Literasi + IPA",
+      "benar": 0,
+      "total": 10,
+      "nilai": 0,
+      "durasi": 244,
+      "t": 1793620736757,
+      "dunia": "kota",
+      "tantangan_id": 1,
+      "telat": 0,
+      "paket_kode": "RPETLM",
+      "soal_lama": 0,
+      "skor": 0,
+      "maks": 10,
+      "lari": 0
     }
   ],
   "jawaban": [
@@ -256,6 +1865,174 @@
       "t": 1793416188542,
       "sesi_id": 1,
       "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 2,
+      "mapel_id": "literasi",
+      "skey": "18vsh4f",
+      "q": "Ide pokok paragraf biasanya terdapat pada ...",
+      "p": 3,
+      "k": 0,
+      "ok": 0,
+      "d": 11.6,
+      "t": 1793620736756,
+      "sesi_id": 2,
+      "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 2,
+      "mapel_id": "literasi",
+      "skey": "ruzizo",
+      "q": "Penulisan huruf kapital yang benar adalah ...",
+      "p": 3,
+      "k": 1,
+      "ok": 0,
+      "d": 12.8,
+      "t": 1793620736757,
+      "sesi_id": 2,
+      "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 2,
+      "mapel_id": "ipa",
+      "skey": "4wh399",
+      "q": "Planet yang paling dekat dengan Matahari adalah ...",
+      "p": 1,
+      "k": 2,
+      "ok": 0,
+      "d": 11.4,
+      "t": 1793620736757,
+      "sesi_id": 2,
+      "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 2,
+      "mapel_id": "ipa",
+      "skey": "14n4kr9",
+      "q": "Hewan yang hanya memakan tumbuhan disebut ...",
+      "p": 0,
+      "k": 1,
+      "ok": 0,
+      "d": 11.3,
+      "t": 1793620736757,
+      "sesi_id": 2,
+      "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 2,
+      "mapel_id": "ipa",
+      "skey": "buwwzs",
+      "q": "Organ tubuh yang berfungsi memompa darah adalah ...",
+      "p": 3,
+      "k": 1,
+      "ok": 0,
+      "d": 11.5,
+      "t": 1793620736757,
+      "sesi_id": 2,
+      "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 2,
+      "mapel_id": "ipa",
+      "skey": "16pxb85",
+      "q": "Proses tumbuhan membuat makanan sendiri disebut ...",
+      "p": -1,
+      "k": 1,
+      "ok": 0,
+      "d": 0,
+      "t": 1793620736757,
+      "sesi_id": 2,
+      "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 2,
+      "mapel_id": "literasi",
+      "skey": "1t4493a",
+      "q": "Kalimat berikut yang merupakan opini adalah ...",
+      "p": -1,
+      "k": 1,
+      "ok": 0,
+      "d": 0,
+      "t": 1793620736757,
+      "sesi_id": 2,
+      "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 2,
+      "mapel_id": "literasi",
+      "skey": "1172duq",
+      "q": "Teks yang bertujuan meyakinkan atau mengajak pembaca disebut teks ...",
+      "p": -1,
+      "k": 2,
+      "ok": 0,
+      "d": 0,
+      "t": 1793620736757,
+      "sesi_id": 2,
+      "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 2,
+      "mapel_id": "literasi",
+      "skey": "1uanijc",
+      "q": "Sinonim kata 'gembira' adalah ...",
+      "p": -1,
+      "k": 1,
+      "ok": 0,
+      "d": 0,
+      "t": 1793620736757,
+      "sesi_id": 2,
+      "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 2,
+      "mapel_id": "ipa",
+      "skey": "5rh21i",
+      "q": "Perubahan wujud dari cair menjadi gas disebut ...",
+      "p": -1,
+      "k": 2,
+      "ok": 0,
+      "d": 0,
+      "t": 1793620736757,
+      "sesi_id": 2,
+      "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 2,
+      "mapel_id": "literasi",
+      "skey": "vqclsr",
+      "q": "Antonim kata 'rajin' adalah ...",
+      "p": 1,
+      "k": 1,
+      "ok": 1,
+      "d": 5.6,
+      "t": 1793620767876,
+      "sesi_id": 0,
+      "j_json": ""
+    },
+    {
+      "kelas_kode": "9ERHDZ",
+      "murid_id": 2,
+      "mapel_id": "ipa",
+      "skey": "buwwzs",
+      "q": "Organ tubuh yang berfungsi memompa darah adalah ...",
+      "p": 0,
+      "k": 1,
+      "ok": 0,
+      "d": 2.3,
+      "t": 1793620780071,
+      "sesi_id": 0,
+      "j_json": ""
     }
   ],
   "materi": [
@@ -267,12 +2044,99 @@
       "t": 1793416188542
     }
   ],
-  "tantangan": [],
-  "tmulai": [],
+  "tantangan": [
+    {
+      "id": 1,
+      "kelas_kode": "9ERHDZ",
+      "jenis": "arena",
+      "judul": "Jatuh Bangun",
+      "mapel": "literasi",
+      "mapel_nama": "Literasi + IPA",
+      "jumlah": 10,
+      "menit": 10,
+      "mulai": 1793619240000,
+      "selesai": 1793638740000,
+      "serentak": true,
+      "acak": true,
+      "sekali": true,
+      "hasil": 1,
+      "aktif": true,
+      "kategori": "latihan",
+      "bobot": {
+        "pg": 1,
+        "bs": 1,
+        "isian": 1,
+        "jodoh": 1,
+        "urut": 1,
+        "sebagian": true
+      },
+      "peta": "",
+      "mapels": {
+        "list": [
+          {
+            "id": "literasi",
+            "n": 5
+          },
+          {
+            "id": "ipa",
+            "n": 5
+          }
+        ],
+        "urut": "acak"
+      },
+      "target": null,
+      "go": 1793620491915,
+      "akhir": 0,
+      "kode_main": "471792"
+    },
+    {
+      "id": 2,
+      "kelas_kode": "9ERHDZ",
+      "jenis": "arena",
+      "judul": "Jatuh Bangun",
+      "mapel": "numerasi",
+      "mapel_nama": "Numerasi",
+      "jumlah": 7,
+      "menit": 10,
+      "mulai": 1793621340000,
+      "selesai": 1793638740000,
+      "serentak": true,
+      "acak": true,
+      "sekali": true,
+      "hasil": 1,
+      "aktif": true,
+      "kategori": "latihan",
+      "bobot": {
+        "pg": 1,
+        "bs": 1,
+        "isian": 1,
+        "jodoh": 1,
+        "urut": 1,
+        "sebagian": true
+      },
+      "peta": "",
+      "mapels": null,
+      "target": null,
+      "go": 0,
+      "akhir": 0,
+      "kode_main": "076543"
+    }
+  ],
+  "tmulai": [
+    {
+      "kelas_kode": "9ERHDZ",
+      "tantangan_id": 1,
+      "murid_id": 2,
+      "t_mulai": 1793620495260
+    }
+  ],
   "pendamping": [],
   "bayar": [],
   "kodes": [],
   "cids": {
-    "test-cid-1": 1793416188543
+    "test-cid-1": 1793416188543,
+    "mvz7h5vkv2jqx1": 1793620739123,
+    "mvz7huqui7k7sn": 1793620771137,
+    "mvz7i4gxbjvm9y": 1793620784400
   }
 }
