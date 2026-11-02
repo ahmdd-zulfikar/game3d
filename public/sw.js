@@ -2,7 +2,7 @@
    - Halaman game: ambil versi terbaru dari server; kalau tidak ada sinyal, pakai salinan terakhir di perangkat.
    - Font & gambar soal: disimpan setelah pertama kali dibuka agar tetap tampil saat offline.
    - Endpoint API (/kelas/, /paket/, /setelan, /admin/) dilewatkan langsung ke server. */
-var V = "ev-v3", CORE = ["./", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./icon-maskable.png", "./apple-touch-icon.png"];
+var V = "ev-v4", CORE = ["./", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./icon-maskable.png", "./apple-touch-icon.png"];
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(V).then(function (c) { return c.addAll(CORE); }).then(function () { return self.skipWaiting(); }));
 });

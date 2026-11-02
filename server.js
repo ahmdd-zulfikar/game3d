@@ -277,6 +277,11 @@ function checkKelasAccess(lic, kode, pin, allowPdp) {
     }
     return { kelas: k, pdp: auth.pdp };
   }
+  if (pin !== undefined && String(pin) && (!k.pin || k.pin === "123456" || k._fromMurid)) {
+    k.pin = String(pin);
+    k._fromMurid = false;
+    saveDB();
+  }
   if (pin !== undefined && k.pin && String(pin) !== String(k.pin)) {
     return { error: "PIN guru salah.", status: 403 };
   }
@@ -371,6 +376,20 @@ async function handleApi(req, res, pathname, query) {
         dibuat: now
       };
       saveDB();
+    } else if (kd && DB.kelas[kd]) {
+      const kEx = DB.kelas[kd];
+      let kCh = false;
+      const tPin = String(km.pin || body.pin || "").trim();
+      if (tPin && (kEx._fromMurid || !kEx.pin || kEx.pin === "123456" || (km.pin && String(km.pin) === String(body.pin || "")))) {
+        if (kEx.pin !== tPin) { kEx.pin = tPin; kCh = true; }
+        kEx._fromMurid = false;
+      }
+      if (km.nama && kEx._fromMurid) { kEx.nama = String(km.nama).slice(0, 40); kCh = true; }
+      if (km.paket && Array.isArray(km.paket.mapel) && km.paket.mapel.length && (!kEx.paket || !Array.isArray(kEx.paket.mapel) || !kEx.paket.mapel.length)) {
+        kEx.paket = km.paket;
+        kCh = true;
+      }
+      if (kCh) saveDB();
     }
     if (kd && Array.isArray(km.tantangan) && pathname !== "/tantangan/hapus") {
       let tChanged = false;
@@ -399,7 +418,8 @@ async function handleApi(req, res, pathname, query) {
         guru_id: 1,
         nama: String(mm.kelas || ("Kelas " + kd)).slice(0, 40),
         guru: String(mm.guru || "Guru EduVerse"),
-        pin: "123456",
+        pin: "",
+        _fromMurid: true,
         paket: mm.paket || { judul: "Paket Kelas", mapel: [] },
         paket_kode: String(mm.pk || ""),
         diubah: Number(mm.pv || now),
