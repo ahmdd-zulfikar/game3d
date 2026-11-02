@@ -993,7 +993,7 @@ async function handleApi(req, res, pathname, query) {
       k = chk.kelas;
       meId = "g1";
       if (body.inGame) {
-        const prevEmo = k.guru_3d && k.guru_3d.emo && now - k.guru_3d.emo.at < 4500 ? k.guru_3d.emo : null;
+        const prevEmo = k.guru_3d && k.guru_3d.emoAt && now - k.guru_3d.emoAt < 4500 ? { emo: k.guru_3d.emo, emoAt: k.guru_3d.emoAt } : null;
         k.guru_3d = {
           id: "g1",
           g: true,
@@ -1005,7 +1005,8 @@ async function handleApi(req, res, pathname, query) {
           sc: { lv: 99, bh: 0, g: 0 },
           st: { s: "main", m: "" },
           aktif: now,
-          emo: body.emo ? { e: String(body.emo).slice(0, 60), at: now } : prevEmo
+          emo: body.emo ? String(body.emo).slice(0, 60) : (prevEmo ? prevEmo.emo : null),
+          emoAt: body.emo ? now : (prevEmo ? prevEmo.emoAt : 0)
         };
       } else if (body.leaveGame && k.guru_3d) {
         k.guru_3d = null;
@@ -1018,7 +1019,7 @@ async function handleApi(req, res, pathname, query) {
       const m = DB.murid.find(x => x.kelas_kode === kode && x.token === token);
       if (!m) return sendJson(res, 401, { error: "Murid tidak dikenali." });
       if (m.blokir) return sendJson(res, 403, { error: "Kamu dikeluarkan dari kelas.", kode: "blokir" });
-      meId = String(m.id);
+      meId = m.id;
       m.aktif = now;
       if (body.z) m.z = String(body.z).slice(0, 24);
       if (body.o && typeof body.o === "object") m.o = body.o;
@@ -1046,6 +1047,7 @@ async function handleApi(req, res, pathname, query) {
       .map(x => {
         const siap = x.siap_id && now - (x.siap_t || 0) < 35000 ? x.siap_id : 0;
         const sc = x.sc || { lv: 1, bh: 0, g: 0 };
+        const em = x.emo && now - x.emo.at < 4500 ? x.emo : null;
         return {
           id: x.id,
           nama: x.nama,
@@ -1058,7 +1060,8 @@ async function handleApi(req, res, pathname, query) {
           sc,
           st: x.st || (siap ? { s: "lobi", m: "" } : { s: "main", m: "" }),
           siap,
-          emo: x.emo && now - x.emo.at < 4500 ? x.emo : null
+          emo: em ? em.e : null,
+          emoAt: em ? em.at : 0
         };
       });
     if (k.guru_3d && now - (k.guru_3d.aktif || 0) < 35000) {
