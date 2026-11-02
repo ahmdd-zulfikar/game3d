@@ -372,6 +372,76 @@ async function handleApi(req, res, pathname, query) {
       };
       saveDB();
     }
+    if (kd && Array.isArray(km.tantangan) && pathname !== "/tantangan/hapus") {
+      let tChanged = false;
+      km.tantangan.forEach(tIn => {
+        if (!tIn || !tIn.id) return;
+        const tid = Number(tIn.id);
+        if (!DB.tantangan.some(x => x.kelas_kode === kd && x.id === tid)) {
+          DB.tantangan.push(Object.assign({}, tIn, { id: tid, kelas_kode: kd }));
+          if (DB.seq.tantangan <= tid) DB.seq.tantangan = tid + 1;
+          tChanged = true;
+        }
+      });
+      if (tChanged) saveDB();
+    }
+  }
+
+  // Auto-sync student & class metadata on serverless cold starts
+  if (body && body._mmeta && body._mmeta.kode) {
+    const mm = body._mmeta;
+    const kd = String(mm.kode || "").trim().toUpperCase();
+    let mChanged = false;
+    if (kd && !DB.kelas[kd]) {
+      const now = Date.now();
+      DB.kelas[kd] = {
+        kode: kd,
+        guru_id: 1,
+        nama: String(mm.kelas || ("Kelas " + kd)).slice(0, 40),
+        guru: String(mm.guru || "Guru EduVerse"),
+        pin: "123456",
+        paket: mm.paket || { judul: "Paket Kelas", mapel: [] },
+        paket_kode: String(mm.pk || ""),
+        diubah: Number(mm.pv || now),
+        kunci: false,
+        rekap: null,
+        dibuat: now
+      };
+      mChanged = true;
+    }
+    if (kd && mm.token && mm.nama && mm.absen) {
+      let m = DB.murid.find(x => x.kelas_kode === kd && x.token === String(mm.token));
+      if (!m) {
+        m = DB.murid.find(
+          x => x.kelas_kode === kd && x.absen === Number(mm.absen) && x.nama.toLowerCase() === String(mm.nama).toLowerCase()
+        );
+        if (m) {
+          m.token = String(mm.token);
+          m.aktif = Date.now();
+        } else {
+          m = {
+            id: DB.seq.murid++,
+            kelas_kode: kd,
+            nama: String(mm.nama).slice(0, 24),
+            absen: Number(mm.absen),
+            token: String(mm.token),
+            aktif: Date.now(),
+            blokir: false
+          };
+          DB.murid.push(m);
+        }
+        mChanged = true;
+      }
+    }
+    if (kd && mm.tan && mm.tan.id) {
+      const tid = Number(mm.tan.id);
+      if (!DB.tantangan.some(x => x.kelas_kode === kd && x.id === tid)) {
+        DB.tantangan.push(Object.assign({}, mm.tan, { id: tid, kelas_kode: kd }));
+        if (DB.seq.tantangan <= tid) DB.seq.tantangan = tid + 1;
+        mChanged = true;
+      }
+    }
+    if (mChanged) saveDB();
   }
 
   // 1. Setelan umum
@@ -1115,10 +1185,18 @@ async function handleApi(req, res, pathname, query) {
     const chk = checkKelasAccess(body.lic, body.kode, body.pin, true);
     if (chk.error) return sendJson(res, chk.status || 403, { error: chk.error, kode: chk.kode });
     const k = chk.kelas;
+    const now = Date.now();
     const murid = DB.murid
       .filter(m => m.kelas_kode === k.kode)
       .sort((a, b) => a.absen - b.absen)
-      .map(m => ({ id: m.id, nama: m.nama, absen: m.absen, aktif: m.aktif, blokir: !!m.blokir }));
+      .map(m => ({
+        id: m.id,
+        nama: m.nama,
+        absen: m.absen,
+        aktif: m.aktif,
+        blokir: !!m.blokir,
+        siap: m.siap_id && now - (m.siap_t || 0) < 35000 ? m.siap_id : 0
+      }));
 
     const sesi = DB.sesi
       .filter(s => s.kelas_kode === k.kode)
@@ -1162,7 +1240,15 @@ async function handleApi(req, res, pathname, query) {
       .filter(x => x.kelas_kode === k.kode)
       .map(x => [x.murid_id, x.mapel_id, x.idx, x.t]);
 
-    const tantangan = DB.tantangan.filter(t => t.kelas_kode === k.kode);
+    const tantangan = DB.tantangan
+      .filter(t => t.kelas_kode === k.kode)
+      .map(t =>
+        Object.assign({}, t, {
+          siap: DB.murid.filter(
+            m => !m.blokir && m.kelas_kode === k.kode && m.siap_id === t.id && now - (m.siap_t || 0) < 35000
+          ).length
+        })
+      );
     const tmulai = DB.tmulai
       .filter(x => x.kelas_kode === k.kode)
       .map(x => [x.tantangan_id, x.murid_id, x.t_mulai]);
@@ -1179,7 +1265,7 @@ async function handleApi(req, res, pathname, query) {
     });
 
     return sendJson(res, 200, {
-      now: Date.now(),
+      now,
       kelas: {
         kode: k.kode,
         nama: k.nama,
@@ -1208,6 +1294,8 @@ async function handleApi(req, res, pathname, query) {
     const m = DB.murid.find(x => x.kelas_kode === kode && x.token === token);
     if (!m) return sendJson(res, 401, { error: "Murid tidak dikenali." });
     if (m.blokir) return sendJson(res, 403, { error: "Kamu dikeluarkan dari kelas.", kode: "blokir" });
+    m.aktif = Date.now();
+    saveDB();
 
     const list = DB.tantangan
       .filter(t => t.kelas_kode === kode && t.aktif)
@@ -1313,18 +1401,40 @@ async function handleApi(req, res, pathname, query) {
     const m = DB.murid.find(x => x.kelas_kode === kode && x.token === token);
     if (!m) return sendJson(res, 401, { error: "Murid tidak dikenali." });
     if (m.blokir) return sendJson(res, 403, { error: "Kamu dikeluarkan dari kelas.", kode: "blokir" });
+
+    const now = Date.now();
+    m.aktif = now;
+    if (body.batal) {
+      if (m.siap_id === id) {
+        m.siap_id = 0;
+        m.siap_t = 0;
+      }
+      saveDB();
+      return sendJson(res, 200, { ok: true });
+    }
+
     const t = DB.tantangan.find(x => x.kelas_kode === kode && x.id === id && x.aktif);
     if (!t) return sendJson(res, 404, { error: "Tantangan tidak ditemukan atau sudah ditutup." });
 
-    const now = Date.now();
     if (now > t.selesai || (t.akhir && now > t.akhir)) {
       return sendJson(res, 400, { error: "Waktu tantangan sudah berakhir." });
     }
     if (t.serentak && !t.go) {
-      return sendJson(res, 200, { now, tunggu: true });
+      m.siap_id = t.id;
+      m.siap_t = now;
+      saveDB();
+      const siapCount = DB.murid.filter(
+        x => !x.blokir && x.kelas_kode === kode && x.siap_id === t.id && now - (x.siap_t || 0) < 35000
+      ).length;
+      return sendJson(res, 200, { now, tunggu: true, siap: Math.max(1, siapCount) });
     }
     if (!t.serentak && now < t.mulai) {
       return sendJson(res, 400, { error: "Tantangan belum dibuka." });
+    }
+
+    if (m.siap_id === t.id) {
+      m.siap_id = 0;
+      m.siap_t = 0;
     }
 
     let tm = DB.tmulai.find(x => x.tantangan_id === t.id && x.murid_id === m.id);
@@ -1335,8 +1445,8 @@ async function handleApi(req, res, pathname, query) {
       } else {
         tm.t_mulai = now;
       }
-      saveDB();
     }
+    saveDB();
 
     const startRef = t.serentak ? t.go : tm.t_mulai;
     const batas = Math.min(t.selesai, startRef + t.menit * 60000);
@@ -1366,9 +1476,21 @@ async function handleApi(req, res, pathname, query) {
       t.akhir = 0;
     } else if (aksi === "akhiri") {
       t.akhir = Date.now();
+      DB.murid.forEach(m => {
+        if (m.kelas_kode === chk.kelas.kode && m.siap_id === t.id) {
+          m.siap_id = 0;
+          m.siap_t = 0;
+        }
+      });
     } else if (aksi === "ulang") {
       t.go = 0;
       t.akhir = 0;
+      DB.murid.forEach(m => {
+        if (m.kelas_kode === chk.kelas.kode && m.siap_id === t.id) {
+          m.siap_id = 0;
+          m.siap_t = 0;
+        }
+      });
     }
     saveDB();
     return sendJson(res, 200, { ok: true, go: t.go, akhir: t.akhir });
